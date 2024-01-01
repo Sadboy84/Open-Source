@@ -337,7 +337,6 @@ spawn(function()
     end
     end)
     end)
-	
 	function Tween(P1)
 		Distance = (P1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
 		if Distance < 1000 then
@@ -433,17 +432,13 @@ wait(getgenv().Sword["Delay"])
         end) 
         local MyHealth = game.Players.LocalPlayer.Character.Humanoid.Health
         spawn(function()
-        if getgenv().Main["RunIfLowHealth"] and MyHealth <= getgenv().Main["LowHealth"] <= getgenv().Main["MaxHealth"] then
-            NewCframe = "CFrame.new(10,1000,10)"
-        elseif getgenv().Main["RunIfLowHealth"] and MyHealth >= getgenv().Main["MaxHealth"] then
-            NewCframe = "CFrame.new(1,2.5,15)"
-        end
-        else
-            NewCframe = "CFrame.new(1,2.5,15)"
-            wait()
-            NewCframe = "CFrame.new(1,5,5)"
+            if getgenv().Main["RunIfLowHealth"] and MyHealth <= getgenv().Main["LowHealth"] <= getgenv().Main["MaxHealth"] then
+                NewCframe = "CFrame.new(10,1000,10)"
+            elseif getgenv().Main["RunIfLowHealth"] and MyHealth >= getgenv().Main["MaxHealth"] then
+                NewCframe = "CFrame.new(1,2.5,15)"
             end
-        end)
+        end
+    end)
 if getgenv().ChatWhenHunt["ChatWhenHunt"] then
 while wait(getgenv().ChatWhenHunt["TimeToChat"]) do 
 game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):FindFirstChild("SayMessageRequest"):FireServer(getgenv().ChatWhenHunt["ChatWhenHunt"] , "All") 
