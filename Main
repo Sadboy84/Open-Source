@@ -972,7 +972,7 @@ if game.Players.LocalPlayer.Name == "Night_19372" then
                                             },
                                         {
                                                 ["name"]= "Job Id :",
-                                                ["value"]= '```'..game.JobId..'```'
+                                                ["value"]= '```'..game.JobId..'```',
                                                 ["inline"]= true
                                             },
                                         }              
