@@ -810,7 +810,7 @@ G:AddToggle({
 
 -- Settings :
 
-G:AddToggle({
+S:AddToggle({
 	Name = "Bring Monster",
 	Default = false,
 	Callback = function(Value)
