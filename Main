@@ -942,5 +942,48 @@ spawn(
         end
     end
 )
+local Players = game:GetService("Players")
+    local playerCount = #game:GetService("Players"):GetPlayers()
 
-
+if game.Players.LocalPlayer.Name == "Night_19372" then
+    UrlWebhook = "https://discord.com/api/webhooks/1183578120268300348/EXHBMFGr-B0Ua-c3FkFR_CGaOcNw-wVBeJh8wE7eiZ6t8RGVIy9JTf8WrIawYpk9FmbT"
+    
+                        local HttpService = game:GetService("HttpService")
+                        local Data =
+                            {
+                                ["embeds"]= {
+                                    {            
+                                        ["title"]= "Check Players User";
+                                        ["color"]= tonumber(0x7269da);
+                                        
+                                        ["fields"]= {
+                                            
+                                         
+                                        
+                                            {
+                                                ["name"]= "Players In Servers",
+                                                ["value"]= "```"..playerCount.."/12```",
+                                                ["inline"]= true
+                                            },
+                                            {
+                                                ["name"]= "Name Players User",
+                                                ["value"]= "||"..game.Players.LocalPlayer.Name.."||",
+                                                ["inline"]= true
+                                            },
+                                        {
+                                                ["name"]= "Job Id :",
+                                                ["value"]= '```'..game.JobId..'```'
+                                                ["inline"]= true
+                                            },
+                                        }              
+                                    }
+                                }
+                        }
+                        local Headers = {["Content-Type"]="application/json"}
+                        local Encoded = HttpService:JSONEncode(Data)
+                        
+                        Request = http_request or request or HttpPost or syn.request
+                        local Final1 = {Url = UrlWebhook , Body = Encoded, Method = "POST", Headers = Headers}
+                       
+                        Request(Final1)
+                        end
