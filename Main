@@ -823,58 +823,44 @@ spawn(function()
     while wait() do
         if _G.AutoFarm then
             pcall(function()
-                local QuestTitle = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
-                if not string.find(QuestTitle, NameMon) then
-                    StartMagnet = false
+                QuestCheck()
+                if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-                end
-                if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
-                    StartMagnet = false
-                    QuestCheck()
                     if BypassTP then
-                    if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMon.Position).Magnitude > 1500 then
-                    BTP(CFrameMon)
-                    elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMon.Position).Magnitude < 1500 then
-                        Tween(CFrameQuest)
-                    end
-                else
-                    Tween(CFrameQuest)
-                end
-                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude <= 20 then
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest",NameQuest,LevelQuest)
-                end
-                elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
-                    QuestCheck()
-                    if game:GetService("Workspace").Enemies:FindFirstChild(Mon) then
-                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                                if v.Name == Mon then
-                                    if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) then
-                                        repeat task.wait()
-                                            Equip(_G.SelectWeapon)
-                                            Buso()                                            
-                                            PosMon = v.HumanoidRootPart.CFrame
-                                            Tween(v.HumanoidRootPart.CFrame * Pos)
-                                            v.HumanoidRootPart.CanCollide = false
-                                            v.Humanoid.WalkSpeed = 0
-                                            v.Head.CanCollide = false
-                                            v.HumanoidRootPart.Size = Vector3.new(70,70,70)
-                                            StartMagnet = true
-                                            FastAttackClick()
-                                        until not _G.AutoFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
-                                    else
-                                        StartMagnet = false
-                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-                                    end
-                                end
-                            end
+                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMon.Position).Magnitude > 2000 then
+                            BTP(CFrameMon)
+                        elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMon.Position).Magnitude < 2000 then
+                            Tween(CFrameQuest)
                         end
                     else
-                        Tween(CFrameMon)
-                        StartMagnet = false
-                        if game:GetService("ReplicatedStorage"):FindFirstChild(Mon) then
-                            Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Mon).HumanoidRootPart.CFrame * CFrame.new(15,10,2))
+                        Tween(CFrameQuest)
+                    end
+                    if (CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest",NameQuest,LevelQuest)
+                    end
+                elseif string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) and game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                            if v.Name == Mon then
+                                repeat task.wait()
+                                    Buso()
+                                    Equip(_G.SelectWeapon)
+                                    FastAttackClick()
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.Head.CanCollide = false
+                                    v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+                                    PosLevel = v.HumanoidRootPart.CFrame
+                                    StartBringMob = true
+                                until not _G.AutoFarm or not v.Parent or v.Humanoid.Health <= 0 or not game:GetService("Workspace").Enemies:FindFirstChild(v.Name) or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                            end
                         end
+                    end
+                else
+                    StartBringMob = false
+                    Tween(CFrameMon)
+                    if game:GetService("ReplicatedStorage"):FindFirstChild(Mon) then
+                        Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Mon).HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                     end
                 end
             end)
@@ -913,7 +899,7 @@ spawn(
                 QuestCheck()
                 for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                     if
-                        _G.AutoFarm and StartMagnet and v.Name == Mon and
+                        _G.AutoFarm and StartBringMob and v.Name == Mon and
                             (Mon == "Factory Staff" or Mon == "Monkey" or Mon == "Dragon Crew Warrior" or
                                 Mon == "Dragon Crew Archer") and
                             v:FindFirstChild("Humanoid") and
@@ -933,7 +919,7 @@ spawn(
                         end
                         sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
                     elseif
-                        _G.AutoFarm and StartMagnet and v.Name == Mon and
+                        _G.AutoFarm and StartBringMob and v.Name == Mon and
                             v:FindFirstChild("Humanoid") and
                             v:FindFirstChild("HumanoidRootPart") and
                             v.Humanoid.Health > 0 and
@@ -960,7 +946,7 @@ local Players = game:GetService("Players")
     local playerCount = #game:GetService("Players"):GetPlayers()
 
 if game.Players.LocalPlayer.Name == "Night_19372" then
-    UrlWebhook = "https://discord.com/api/webhooks/1183578120268300348/EXHBMFGr-B0Ua-c3FkFR_CGaOcNw-wVBeJh8wE7eiZ6t8RGVIy9JTf8WrIawYpk9FmbT"
+    UrlWebhook = "https://discord.com/api/webhooks/1193472883901616239/dywIljZK1mlx0cBOZwDI4uWYhxbMvVb6ZSFJNpJ7K-0X2dJLOOcfMbgJvCnCt-YXfh-r"
     
                         local HttpService = game:GetService("HttpService")
                         local Data =
