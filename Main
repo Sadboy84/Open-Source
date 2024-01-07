@@ -840,6 +840,7 @@ spawn(function()
                                 repeat task.wait()
                                     EquipTool(SelectWP)
                                     AutoHaki()
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                     v.HumanoidRootPart.CanCollide = false
                                     v.Humanoid.WalkSpeed = 0
                                     v.Head.CanCollide = false
