@@ -731,12 +731,12 @@ G:AddToggle({
 
 -- SETTINGS :
 
-local Section = S:AddSection({
+local Section = G:AddSection({
 	Name = "Bring Mob"
 })
 
-S:AddToggle({
-	Name = "Bring Mob",
+G:AddToggle({
+	Name = "Bring Monster",
 	Default = false,
 	Callback = function(Value)
 		BringMonster = Value
@@ -797,6 +797,9 @@ spawn(function()
                                     PosLevelFarm = v.HumanoidRootPart.CFrame
                                     BringMob = true
                                 until not _G.LevelFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                            else
+                                BringMob = false
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                             end
                         end
                     end
