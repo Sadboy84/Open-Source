@@ -786,7 +786,6 @@ G:AddToggle({
 	Default = false,
 	Callback = function(Value)
 		_G.AutoFarm = Value
-        StopTween(_G.AutoFarm)
 	end    
 })
 
