@@ -632,8 +632,8 @@ end
 
 function Tween(Pos)
     Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
-        game.Players.LocalPlayer.Character.Humanoid.Sit = false
+    if game:GetService("Players").LocalPlayer.Character.Humanoid.Sit == true then
+        game:GetService("Players").LocalPlayer.Character.Humanoid.Sit = false
     end
     pcall(function()
         tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/300, Enum.EasingStyle.Linear),{CFrame = Pos})
@@ -643,118 +643,52 @@ function Tween(Pos)
         tween:Cancel()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
     end
-    if _G.StopTween == true then
+    if StopTween == true then
         tween:Cancel()
         NoClip = false
     end
 end
 
+-- BTP :
 
--- Tween No Clip :
-
-function Tween1(Pos)
-    Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    if Distance >= 1 then
-        Speed = 300
-    end
-    game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear), {CFrame = Pos}):Play()
-    if _G.StopTeleport then
-        game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear), {CFrame = Pos}):Cancel()
-    end
-    NoClip = true
-    wait(Distance/Speed)
-    NoClip = false
+function BypassTP(P)
+    game.Players.LocalPlayer.Character.Head:Destroy()
+    wait(0.5)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
 end
 
--- Bypass Teleport :
-
-function BTP(Position)
-	game.Players.LocalPlayer.Character.Head:Destroy()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Position
-	wait(1)
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Position
-	game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-end
-
-
-function BTP(P)
-	repeat wait(0.5)
-		game.Players.LocalPlayer.Character.Humanoid:ChangeState(15)
-		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
-		task.wait()
-		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
-	until (P.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 2000
-end
-
--- NoBodyClip :
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if NoClip or _G.AutoFarm then
-                if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
-                    local Noclip = Instance.new("BodyVelocity")
-						Noclip.Name = "BodyClip"
-						Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
-						Noclip.MaxForce = Vector3.new(100000,100000,100000)
-						Noclip.Velocity = Vector3.new(0,0,0)
-					end
-				else
-					game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
-				end
-			end)
-		end
-	end)
-
--- NoClip :
-spawn(function()
-    while wait() do
-        pcall(function()
-            game:GetService("RunService").Stepped:Connect(function()
-                if NoClip or _G.AutoFarm then
-                    for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
-                        if v:IsA("BasePart") then
-                            v.CanCollide = false
-                        end
-                    end
-                end
-            end)
-        end)
-    end
-end)
-
--- Equip tool :
-function Equip(Tool)
-    if game.Players.LocalPlayer.Backpack:FindFirstChild(Tool) then
-        Toolse = game.Players.LocalPlayer.Backpack:FindFirstChild(Tool)
-        wait()
-        game.Players.LocalPlayer.Character.Humanoid:EquipTool(Toolse)
+-- EquipTool :
+function EquipTool(Toolse)
+    if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(Toolse) then
+        tool = game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(Toolse)
+        wait(0.5)
+        game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
     end
 end
--- Buso :
-function Buso()
+
+-- Haki :
+function AutoHaki()
     if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
     end
 end
--- FastAttack :
 
-function FastAttackClick()
-    local Module = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework)
-    local CombatFramework = debug.getupvalues(Module)[2]
-    local CamShake = require(game.ReplicatedStorage.Util.CameraShaker)
-    CamShake:Stop()
-    CombatFramework.activeController.attacking = false
-    CombatFramework.activeController.timeToNextAttack = 0
-    CombatFramework.activeController.hitboxMagnitude = 180
-    game:GetService'VirtualUser':CaptureController()
-    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-end
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+-- Source : 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/Nghiavndeptraivcc/Orion-nhu-cut/main/Orion.Source')))()
-local Window = OrionLib:MakeWindow({Name = "Night Hub(Beta)", HidePremium = false,IntroText = "Night Hub Library", SaveConfig = true, ConfigFolder = "Night Hub"})
+local Window = OrionLib:MakeWindow({Name = "Night Hub", HidePremium = false,IntroText = "Night Hub", SaveConfig = true, ConfigFolder = "Night Hub"})
+
+-- Tabs :
+
+local I = Window:MakeTab({
+	Name = "Info",
+	Icon = "rbxassetid://15541504459",
+	PremiumOnly = false
+})
 
 local G = Window:MakeTab({
 	Name = "General",
@@ -768,6 +702,8 @@ local S = Window:MakeTab({
 	PremiumOnly = false
 })
 
+-----------------------------------------------------------------------------------------------------------------------------------------
+
 local Section = G:AddSection({
 	Name = "Select Weapon"
 })
@@ -777,38 +713,67 @@ G:AddDropdown({
 	Default = "Melee",
 	Options = {"Melee", "Sword"},
 	Callback = function(Value)
-		_G.SelectWeapon = Value
+		SelectWP = Value
 	end    
+})
+
+local Section = G:AddSection({
+	Name = "Farmming Toggle"
 })
 
 G:AddToggle({
 	Name = "Auto Farm",
 	Default = false,
 	Callback = function(Value)
-		_G.AutoFarm = Value
+		_G.LevelFarm = Value
 	end    
 })
 
--- Settings :
+-- SETTINGS :
+
+local Section = S:AddSection({
+	Name = "Bring Mob"
+})
 
 S:AddToggle({
-	Name = "Bring Monster",
+	Name = "Bring Mob",
 	Default = false,
 	Callback = function(Value)
-		_G.BringMonster = Value
+		BringMonster = Value
 	end    
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------ Codes :
+
 
 spawn(function()
     while wait() do
-        if _G.AutoFarm then
+        if _G.LevelFarm then
             pcall(function()
                 QuestCheck()
-                if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+                if not string.find(game.Players.LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false then
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                     if BypassTP then
                         if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMon.Position).Magnitude > 2000 then
-                            BTP(CFrameMon)
+                            BypassTP(CFrameMon)
                         elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMon.Position).Magnitude < 2000 then
                             Tween(CFrameQuest)
                         end
@@ -818,26 +783,25 @@ spawn(function()
                     if (CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest",NameQuest,LevelQuest)
                     end
-                elseif string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) and game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+                elseif string.find(game.Players.LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) and game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true then
                     for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                            if v.Name == Mon then
+                        if v.Name == Mon then
+                            if v.Humanoid.Health > 0 and _G.LevelFarm and v:FindFirstChild("HumanoidRootPart") and v.Parent then
                                 repeat task.wait()
-                                    Buso()
-                                    Equip(_G.SelectWeapon)
-                                    FastAttackClick()
+                                    EquipTool(SelectWP)
+                                    AutoHaki()
                                     v.HumanoidRootPart.CanCollide = false
                                     v.Humanoid.WalkSpeed = 0
                                     v.Head.CanCollide = false
-                                    v.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
-                                    PosLevel = v.HumanoidRootPart.CFrame
-                                    StartBringMob = true
-                                until not _G.AutoFarm or not v.Parent or v.Humanoid.Health <= 0 or not game:GetService("Workspace").Enemies:FindFirstChild(v.Name) or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                                    v.HumanoidRootPart.Size = Vector3.new(70,70,70)
+                                    PosLevelFarm = v.HumanoidRootPart.CFrame
+                                    BringMob = true
+                                until not _G.LevelFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
                             end
                         end
                     end
                 else
-                    StartBringMob = false
+                    BringMob = false
                     Tween(CFrameMon)
                     if game:GetService("ReplicatedStorage"):FindFirstChild(Mon) then
                         Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Mon).HumanoidRootPart.CFrame * CFrame.new(2,20,2))
@@ -848,85 +812,58 @@ spawn(function()
     end
 end)
 
-task.spawn(
-    function()
-        while wait() do
-            if _G.SelectWeapon == "Melee" then
-                for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+spawn(function()
+    while wait() do
+        if BringMob and BringMonster then
+            pcall(function()
+                for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+                    if not string.find(v.Name,"Boss") and v.Name == MonFarm and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 350 then
+                        v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                        v.HumanoidRootPart.CFrame = PosMon
+                        v.Humanoid:ChangeState(14)
+                        v.HumanoidRootPart.CanCollide = false
+                        v.Head.CanCollide = false
+                        if v.Humanoid:FindFirstChild("Animator") then
+                            v.Humanoid.Animator:Destroy()
+                        end
+                        sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+task.spawn(function()
+    while wait() do
+        pcall(function()
+            if SelectWP == "Melee" then
+                for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
                     if v.ToolTip == "Melee" then
                         if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
-                            _G.SelectWeapon = v.Name
+                            SelectWP = v.Name
                         end
                     end
                 end
-            elseif _G.SelectWeapon == "Sword" then
-                for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+            elseif SelectWP == "Sword" then
+                for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
                     if v.ToolTip == "Sword" then
                         if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
-                            _G.SelectWeapon = v.Name
+                            SelectWP = v.Name
                         end
                     end
                 end
             end
-        end
+        end)
     end
-)
+end)
 
-spawn(
-    function()
-        while task.wait() do
-            if _G.BringMonster then
-                QuestCheck()
-                for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                    if
-                        _G.AutoFarm and StartBringMob and v.Name == Mon and
-                            (Mon == "Factory Staff" or Mon == "Monkey" or Mon == "Dragon Crew Warrior" or
-                                Mon == "Dragon Crew Archer") and
-                            v:FindFirstChild("Humanoid") and
-                            v:FindFirstChild("HumanoidRootPart") and
-                            v.Humanoid.Health > 0 and
-                            (v.HumanoidRootPart.Position -
-                                game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <=
-                                350
-                     then
-                        v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
-                        v.HumanoidRootPart.CFrame = PosMon
-                        v.Humanoid:ChangeState(14)
-                        v.HumanoidRootPart.CanCollide = false
-                        v.Head.CanCollide = false
-                        if v.Humanoid:FindFirstChild("Animator") then
-                            v.Humanoid.Animator:Destroy()
-                        end
-                        sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
-                    elseif
-                        _G.AutoFarm and StartBringMob and v.Name == Mon and
-                            v:FindFirstChild("Humanoid") and
-                            v:FindFirstChild("HumanoidRootPart") and
-                            v.Humanoid.Health > 0 and
-                            (v.HumanoidRootPart.Position -
-                                game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <=
-                                350
-                     then
-                        v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
-                        v.HumanoidRootPart.CFrame = PosMon
-                        v.Humanoid:ChangeState(14)
-                        v.HumanoidRootPart.CanCollide = false
-                        v.Head.CanCollide = false
-                        if v.Humanoid:FindFirstChild("Animator") then
-                            v.Humanoid.Animator:Destroy()
-                        end
-                        sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
-                    end
-                end
-            end
-        end
-    end
-)
+----- Webhook TEST :
 local Players = game:GetService("Players")
     local playerCount = #game:GetService("Players"):GetPlayers()
 
 if game.Players.LocalPlayer.Name == "Night_19372" then
-    UrlWebhook = "https://discord.com/api/webhooks/1193472883901616239/dywIljZK1mlx0cBOZwDI4uWYhxbMvVb6ZSFJNpJ7K-0X2dJLOOcfMbgJvCnCt-YXfh-r"
+    UrlWebhook = ""
     
                         local HttpService = game:GetService("HttpService")
                         local Data =
@@ -937,9 +874,7 @@ if game.Players.LocalPlayer.Name == "Night_19372" then
                                         ["color"]= tonumber(0x7269da);
                                         
                                         ["fields"]= {
-                                            
-                                         
-                                        
+            
                                             {
                                                 ["name"]= "Players In Servers",
                                                 ["value"]= "```"..playerCount.."/12```",
