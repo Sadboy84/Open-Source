@@ -835,7 +835,7 @@ spawn(function()
                     QuestCheck()
                     if BypassTP then
                     if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMon.Position).Magnitude > 2000 then
-                    BTP(CFrameQuest)
+                    BypassTP(CFrameQuest)
                     elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMon.Position).Magnitude < 2000 then
                         Tween(CFrameQuest)
                     end
