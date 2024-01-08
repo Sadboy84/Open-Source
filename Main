@@ -819,6 +819,33 @@ function Click()
     game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
 end
 
+-- Delete Effect :
+getgenv().NoDieEffect = true
+
+if getgenv().NoDieEffect then
+    if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Death") then
+        game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
+    end
+    if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
+        game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
+    end
+end
+
+local CombatFramework = require(game:GetService("Players").LocalPlayer.PlayerScripts:WaitForChild("CombatFramework"))
+local CombatFrameworkR = getupvalues(CombatFramework)[2]
+local RigController = require(game:GetService("Players")["LocalPlayer"].PlayerScripts.CombatFramework.RigController)
+local RigControllerR = getupvalues(RigController)[2]
+local realbhit = require(game.ReplicatedStorage.CombatFramework.RigLib)
+local cooldownfastattack = tick()
+
+spawn(function()
+    while wait() do
+        game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = false
+    end
+end)
+
+
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- Source : 
@@ -880,7 +907,7 @@ local Section = S:AddSection({
 
 S:AddToggle({
 	Name = "Bring Monster",
-	Default = false,
+	Default = true,
 	Callback = function(Value)
 		_G.BringMonster = Value
 	end    
@@ -892,7 +919,7 @@ local Section = S:AddSection({
 
 S:AddToggle({
 	Name = "Fast Attack",
-	Default = false,
+	Default = true,
 	Callback = function(Value)
 		_G.FastAttack = Value
 	end    
