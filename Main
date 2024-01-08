@@ -707,13 +707,22 @@ spawn(
             
 -- BTP :
 
+function BypassTP(Position)
+	game.Players.LocalPlayer.Character.Head:Destroy()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Position
+	wait(1)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Position
+	game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+end
+
+
 function BypassTP(P)
-    game.Players.LocalPlayer.Character.Head:Destroy()
-    wait(0.5)
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
-    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+	repeat wait(0.5)
+		game.Players.LocalPlayer.Character.Humanoid:ChangeState(15)
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
+		task.wait()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
+	until (P.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 2000
 end
 
 -- EquipTool :
@@ -873,7 +882,7 @@ S:AddToggle({
 	Name = "Bring Monster",
 	Default = false,
 	Callback = function(Value)
-		BringMonster = Value
+		_G.BringMonster = Value
 	end    
 })
 
