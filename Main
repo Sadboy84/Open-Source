@@ -856,7 +856,7 @@ spawn(function()
                                             EquipTool(SelectWP)
                                             AutoHaki()                                            
                                             PosMon = v.HumanoidRootPart.CFrame
-                                            Tween(v.HumanoidRootPart.CFrame * Pos)
+                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                                             v.HumanoidRootPart.CanCollide = false
                                             v.Humanoid.WalkSpeed = 0
                                             v.Head.CanCollide = false
