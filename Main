@@ -1018,7 +1018,7 @@ spawn(
                 QuestCheck()
                 for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                     if
-                        _G.AutoFarm and BringMob and v.Name == Mon and
+                        _G.LevelFarm and BringMob and v.Name == Mon and
                             (Mon == "Factory Staff" or Mon == "Monkey" or Mon == "Dragon Crew Warrior" or
                                 Mon == "Dragon Crew Archer") and
                             v:FindFirstChild("Humanoid") and
@@ -1038,7 +1038,7 @@ spawn(
                         end
                         sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
                     elseif
-                    _G.AutoFarm and BringMob and v.Name == Mon and
+                    _G.LevelFarm and BringMob and v.Name == Mon and
                             v:FindFirstChild("Humanoid") and
                             v:FindFirstChild("HumanoidRootPart") and
                             v.Humanoid.Health > 0 and
