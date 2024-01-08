@@ -656,7 +656,7 @@ spawn(
             pcall(
                 function()
                     if
-                    _G.LevelFarm or NoClip
+                       _G.LevelFarm or NoClip
                      then
                         if
                             not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild(
@@ -825,53 +825,65 @@ spawn(function()
         if _G.LevelFarm then
             pcall(function()
                 QuestCheck()
-                if not string.find(game.Players.LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+                local QuestTitle = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
+                if not string.find(QuestTitle, NameMon) then
+                    BringMob = false
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                end
+                if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+                    BringMob = false
+                    QuestCheck()
                     if BypassTP then
-                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMon.Position).Magnitude > 2000 then
-                            BypassTP(CFrameMon)
-                        elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMon.Position).Magnitude < 2000 then
-                            Tween(CFrameQuest)
-                        end
-                    else
+                    if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMon.Position).Magnitude > 2000 then
+                    BTP(CFrameQuest)
+                    elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMon.Position).Magnitude < 2000 then
                         Tween(CFrameQuest)
                     end
-                    if (CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest",NameQuest,LevelQuest)
+                else
+                    Tween(CFrameQuest)
+                end
+                if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude <= 20 then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest",NameQuest,LevelQuest)
                     end
-                elseif string.find(game.Players.LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) and game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true then
-                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if v.Name == Mon then
-                            if v.Humanoid.Health > 0 and _G.LevelFarm and v:FindFirstChild("HumanoidRootPart") and v.Parent then
-                                repeat task.wait()
-                                    EquipTool(SelectWP)
-                                    AutoHaki()
-                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                    v.HumanoidRootPart.CanCollide = false
-                                    v.Humanoid.WalkSpeed = 0
-                                    v.Head.CanCollide = false
-                                    v.HumanoidRootPart.Size = Vector3.new(70,70,70)
-                                    PosLevelFarm = v.HumanoidRootPart.CFrame
-                                    BringMob = true
-                                until not _G.LevelFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
-                            else
-                                BringMob = false
-                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+                    QuestCheck()
+                    if game:GetService("Workspace").Enemies:FindFirstChild(Mon) then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                if v.Name == Mon then
+                                    if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) then
+                                        repeat task.wait()
+                                            EquipTool(SelectWP)
+                                            AutoHaki()                                            
+                                            PosMon = v.HumanoidRootPart.CFrame
+                                            Tween(v.HumanoidRootPart.CFrame * Pos)
+                                            v.HumanoidRootPart.CanCollide = false
+                                            v.Humanoid.WalkSpeed = 0
+                                            v.Head.CanCollide = false
+                                            v.HumanoidRootPart.Size = Vector3.new(70,70,70)
+                                            BringMob = true
+                                            game:GetService'VirtualUser':CaptureController()
+                                            game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                        until not _G.AutoFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                                    else
+                                        BringMob = false
+                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                                    end
+                                end
                             end
                         end
-                    end
-                else
-                    BringMob = false
-                    Tween(CFrameMon)
-                    if game:GetService("ReplicatedStorage"):FindFirstChild(Mon) then
-                        Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Mon).HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                    else
+                        Tween(CFrameMon)
+                        BringMob = false
+                        if game:GetService("ReplicatedStorage"):FindFirstChild(Mon) then
+                            Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Mon).HumanoidRootPart.CFrame * CFrame.new(15,10,2))
+                        end
                     end
                 end
             end)
         end
     end
 end)
-
 spawn(function()
     while wait() do
         if BringMob and BringMonster then
