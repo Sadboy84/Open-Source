@@ -1,8 +1,8 @@
-if game.PlaceID == 2753915549 then
+if game.PlaceId == 2753915549 then
     FirstWorld = true
-elseif game.PlaceID == 4442272183 then
+elseif game.PlaceId == 4442272183 then
     SecondsWorld = true
-elseif game.PlaceID == 7449423635 then
+elseif game.PlaceId == 7449423635 then
     ThirdWorld = true
 else
     game:GetService("Players").LocalPlayer:Kick("You Are Blacklist ' How Do Run! ' ")
