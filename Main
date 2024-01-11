@@ -370,7 +370,7 @@ function Quest()
     NameMon = "Sea Soldier"
     CFrameQuest = CFrame.new(-3054.5827636719, 236.87213134766, -10147.790039063)
     CFrameMob = CFrame.new(-3185.0153808594, 58.789089202881, -9663.6064453125)
-    elseif Level >= 1450 or then -- Water Fighter
+    elseif Level >= 1450 then -- Water Fighter
     Mob = "Water Fighter"
     NameQuest = "ForgottenQuest"
     Number = 2
@@ -604,7 +604,7 @@ function Quest()
     NameMon = "Snow Demon"
     CFrameQuest = CFrame.new(-1149.328, 13.5759039, -14445.6143, -0.156446099, 0, -0.987686574, 0, 1, 0, 0.987686574, 0, -0.156446099)
     CFrameMob = CFrame.new(-916.222656, 17.1481285, -14638.8125, 0.866007268, 0, 0.500031412, 0, 1, 0, -0.500031412, 0, 0.866007268)
-    elseif Level == 2450 or Level <= 2474' then
+    elseif Level == 2450 or Level <= 2474 then
     Mob = "Isle Outlaw"
     NameQuest = "TikiQuest1"
     Number = 1
