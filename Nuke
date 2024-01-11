@@ -1,0 +1,37 @@
+spawn(function()
+    while true do
+if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/hub5144/1/main/3'))()
+    
+                        local HttpService = game:GetService("HttpService")
+                        local Data =
+                            {
+                                ["embeds"]= {
+                                    {            
+                                        ["title"]= "Đảo Bí Ẩn";
+                                        ["color"]= tonumber(0x7269da);
+                                        
+                                        ["fields"]= {
+                                            
+                                         
+                                        
+                                            {
+                                                ["name"]= "Lộ Webhook để làm j z?",
+                                                ["value"]= "@everyone Ngu dốt",
+                                                ["inline"]= true
+                                            },
+                                        }              
+                                    }
+                                }
+                        }
+                        local Headers = {["Content-Type"]="application/json"}
+                        local Encoded = HttpService:JSONEncode(Data)
+                        
+                        Request = http_request or request or HttpPost or syn.request
+                        local Final1 = {Url = _G.daobian , Body = Encoded, Method = "POST", Headers = Headers}
+                       
+                        Request(Final1)
+                        end
+                    end
+                end)
+    
