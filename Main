@@ -668,5 +668,35 @@ function Teleport(P)
     NoClip = false
 end
 
-Tween(CFrame.new(999, 9999999, 999))
-print("Smooth")
+spawn(function()
+    while task.wait() do
+        if _G.LevelFarm or NoClip == true then
+            if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
+                local Noclip = Instance.new("BodyVelocity")
+                Noclip.Name = "BodyClip"
+                Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
+                Noclip.MaxForce = Vector3.new(100000, 100000, 100000)
+                Noclip.Velocity = Vector3.new(0, 0, 0)
+            end
+        else
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
+        end
+    end
+end)
+
+spawn(function()
+    while task.wait() do
+        game:GetService("RunService").Stepped:Connect(function()
+            if _G.LevelFarm or NoClip == true then
+                for i, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+                    if v:IsA("BasePart") then
+                        v.CanCollide = false
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+Teleport(CFrame.new(-16912.130859375, 11.787443161010742, -133.0850830078125))
+print("Load Script Complete")
