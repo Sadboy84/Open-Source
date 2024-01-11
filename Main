@@ -803,36 +803,6 @@ function AttackNoCD()
     end
 end
 
--- Delete Effect :
-getgenv().NoDieEffect = true
-
-if getgenv().NoDieEffect then
-    if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Death") then
-        game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
-    end
-    if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
-        game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
-    end
-end
-
-spawn(function()
-    while wait() do
-        game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = false
-        game:GetService("ReplicatedStorage").Util.Sound.Storage.Other:FindFirstChild("LevelUp_Proxy"):Destroy()
-        game:GetService("ReplicatedStorage").Util.Sound.Storage.Other:FindFirstChild("LevelUp"):Destroy()
-        game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()  
-        game:GetService("ReplicatedStorage").Effect.Container.LevelUp:Destroy()
-    end
-end)
-
-if game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit') then
-    game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit'):Destroy()
-end
-
-if game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit') then
-    game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit'):Destroy()
-end
-
 -- Anti Kick 70%
 function AntiKick()
     for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
@@ -1207,19 +1177,7 @@ S:AddDropdown({
 	end    
 })
 
-
-
-
-
-
-
-
-
-
-
 ------ Codes :
-
-
 spawn(function()
     while wait() do
         if _G.LevelFarm then
@@ -1386,3 +1344,32 @@ task.spawn(function()
         end)
     end
 end)
+-- Delete Effect :
+getgenv().NoDieEffect = true
+
+if getgenv().NoDieEffect then
+    if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Death") then
+        game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
+    end
+    if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
+        game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
+    end
+end
+
+spawn(function()
+    while wait() do
+        game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = false
+        game:GetService("ReplicatedStorage").Util.Sound.Storage.Other:FindFirstChild("LevelUp_Proxy"):Destroy()
+        game:GetService("ReplicatedStorage").Util.Sound.Storage.Other:FindFirstChild("LevelUp"):Destroy()
+        game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()  
+        game:GetService("ReplicatedStorage").Effect.Container.LevelUp:Destroy()
+    end
+end)
+
+if game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit') then
+    game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit'):Destroy()
+end
+
+if game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit') then
+    game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit'):Destroy()
+end
