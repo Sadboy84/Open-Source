@@ -1,5 +1,4 @@
--- Night Hub No Skid -- :
-
+-- Check Sea & Check Game :
 if game.PlaceId == 2753915549 then
     Sea1 = true
 elseif game.PlaceId == 4442272183 then
@@ -10,14 +9,8 @@ else
     game:GetService("Players").LocalPlayer:Kick("Support Only Blox Fruits")
 end
 
--- Local :
-
-local plr = game:GetService("Players").LocalPlayer
-
-
----------------------------------------------------------------
-
-function Quest() 
+-- CheckQuest :
+function QuestCheck() 
     MyLevel = game:GetService("Players").LocalPlayer.Data.Level.Value
     if Sea1 then
         if MyLevel == 1 or MyLevel <= 9 then
@@ -25,7 +18,7 @@ function Quest()
             LevelQuest = 1
             NameQuest = "BanditQuest1"
             NameMon = "Bandit"
-            CFrameQuest = CFrame.new(1059.37195, 15.4495068, 1550.4231)
+            CFrameQuest = CFrame.new(1059.37195, 15.4495068, 1550.4231, 0.939700544, -0, -0.341998369, 0, 1, -0, 0.341998369, 0, 0.939700544)
             CFrameMon = CFrame.new(1045.962646484375, 27.00250816345215, 1560.8203125)
         elseif MyLevel == 10 or MyLevel <= 14 then
             Mon = "Monkey"
@@ -39,42 +32,42 @@ function Quest()
             LevelQuest = 2
             NameQuest = "JungleQuest"
             NameMon = "Gorilla"
-            CFrameQuest = CFrame.new(-1598.08911, 35.5501175, 153.377838)
+            CFrameQuest = CFrame.new(-1598.08911, 35.5501175, 153.377838, 0, 0, 1, 0, 1, -0, -1, 0, 0)
             CFrameMon = CFrame.new(-1129.8836669921875, 40.46354675292969, -525.4237060546875)
         elseif MyLevel == 30 or MyLevel <= 39 then
             Mon = "Pirate"
             LevelQuest = 1
             NameQuest = "BuggyQuest1"
             NameMon = "Pirate"
-            CFrameQuest = CFrame.new(-1141.07483, 4.10001802, 3831.5498)
+            CFrameQuest = CFrame.new(-1141.07483, 4.10001802, 3831.5498, 0.965929627, -0, -0.258804798, 0, 1, -0, 0.258804798, 0, 0.965929627)
             CFrameMon = CFrame.new(-1103.513427734375, 13.752052307128906, 3896.091064453125)
         elseif MyLevel == 40 or MyLevel <= 59 then
             Mon = "Brute"
             LevelQuest = 2
             NameQuest = "BuggyQuest1"
             NameMon = "Brute"
-            CFrameQuest = CFrame.new(-1141.07483, 4.10001802, 3831.5498)
+            CFrameQuest = CFrame.new(-1141.07483, 4.10001802, 3831.5498, 0.965929627, -0, -0.258804798, 0, 1, -0, 0.258804798, 0, 0.965929627)
             CFrameMon = CFrame.new(-1140.083740234375, 14.809885025024414, 4322.92138671875)
         elseif MyLevel == 60 or MyLevel <= 74 then
             Mon = "Desert Bandit"
             LevelQuest = 1
             NameQuest = "DesertQuest"
             NameMon = "Desert Bandit"
-            CFrameQuest = CFrame.new(894.488647, 5.14000702, 4392.43359)
+            CFrameQuest = CFrame.new(894.488647, 5.14000702, 4392.43359, 0.819155693, -0, -0.573571265, 0, 1, -0, 0.573571265, 0, 0.819155693)
             CFrameMon = CFrame.new(924.7998046875, 6.44867467880249, 4481.5859375)
         elseif MyLevel == 75 or MyLevel <= 89 then
             Mon = "Desert Officer"
             LevelQuest = 2
             NameQuest = "DesertQuest"
             NameMon = "Desert Officer"
-            CFrameQuest = CFrame.new(894.488647, 5.14000702, 4392.43359)
+            CFrameQuest = CFrame.new(894.488647, 5.14000702, 4392.43359, 0.819155693, -0, -0.573571265, 0, 1, -0, 0.573571265, 0, 0.819155693)
             CFrameMon = CFrame.new(1608.2822265625, 8.614224433898926, 4371.00732421875)
         elseif MyLevel == 90 or MyLevel <= 99 then
             Mon = "Snow Bandit"
             LevelQuest = 1
             NameQuest = "SnowQuest"
             NameMon = "Snow Bandit"
-            CFrameQuest = CFrame.new(1389.74451, 88.1519318, -1298.90796)
+            CFrameQuest = CFrame.new(1389.74451, 88.1519318, -1298.90796, -0.342042685, 0, 0.939684391, 0, 1, 0, -0.939684391, 0, -0.342042685)
             CFrameMon = CFrame.new(1354.347900390625, 87.27277374267578, -1393.946533203125)
         elseif MyLevel == 100 or MyLevel <= 119 then
             Mon = "Snowman"
@@ -635,83 +628,43 @@ function Quest()
         end
     end
 end
-
--- Tween By Night Hub :
+-- Tween :
 
 function Tween(Pos)
-    Magnitude = (Pos.Magnitude - plr.Character.HumanoidRootPart.Position).Magnitude
-    if plr.Character.Humanoid.Sit == true then -- nếu ngồi thì dậy đi cu
-        plr.Character.Humanoid.Sit = false
+    Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+    if game:GetService("Players").LocalPlayer.Character.Humanoid.Sit == true then
+        game:GetService("Players").LocalPlayer.Character.Humanoid.Sit = false
     end
-    pcall(function() -- Debug cho e tí >w<
-        weeee = game:GetService("TweenService"):Create(plr.Character.HumanoidRootPart, TweenInfo.new(Magnitude/300, Enum.EasingStyle.Linear), {CFrame = Pos})
+    pcall(function()
+        tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/300, Enum.EasingStyle.Linear),{CFrame = Pos})
     end)
-    weeee:Play() -- Bay deeee --
-    if Magnitude <= 300 then -- Dich chuyen den me luon di bay lm cc j...
-        weeee:Cancel() -- Bay cc
-        plr.Character.HumanoidRootPart.CFrame = Pos -- Dịch chuyển mọe luôn
-    end
-    if NightHub == true then -- Stop đèn đỏ đê
+    tween:Play()
+    if Distance <= 300 then
         tween:Cancel()
-        Noclip = false
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
+    end
+    if _G.StopTween == true then
+        tween:Cancel()
+        NoClip = false
     end
 end
 
--- Bypass :
-
-function Bypass(Yamate)
-    game.Players.LocalPlayer.Character.Head:Destroy()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Yamate
-	wait(1)
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Yamate
-    wait(1)
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Yamate
-    wait(1)
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Yamate
-    wait(1)
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Yamate
-    wait(1)
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Yamate
-    wait(1)
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Yamate
-    wait(1)
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Yamate
-    wait(1)
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Yamate
-    wait(1)
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Yamate
-    wait(1)
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Yamate
-    wait(1)
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Yamate
-    wait(1)
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Yamate -- :))
-	game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-end
-
--- Cầm :
-function EquipTool(Youtube)
-    if game:GetService("Players").LocalPlayer.BackPack:FindFirstChill(Youtube) then
-    tool = game:GetService("Players").LocalPlayer.BackPack:FindFirstChill(Youtube) -- làm thế cho gọn
-    wait(0.5)
-    game:GetService("Players").LocalPlayer.Character.Humanoid:EquipTool(tool) -- nắm j cx đc chừ nắm ch*m
+function Teleport(P)
+    local Distance = (P.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+    if Distance >= 1 then
+        Speed = 300
     end
-end
-
--- Touch/Click
-
-function Click()
-    wait(0.5)
-    game:GetService'VirtualUser':CaptureController()
-    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-end
-
--- Haki :
-
-function AutoHaki()
-    if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+    pcall(function()
+        teleport = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear), {CFrame = P})
+    end)
+    teleport:Play()
+    if _G.StopTween == true then
+        teleport:Cancel()
+        NoClip = false
     end
+    NoClip = true
+    wait(Distance/Speed)
+    NoClip = false
 end
 
 -- Clip :
@@ -748,9 +701,109 @@ spawn(
         )
     end
 )
+            
+-- BTP :
 
--- Fix Lag :
+function BypassTP(Position)
+	game.Players.LocalPlayer.Character.Head:Destroy()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Position
+	wait(1)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Position
+	game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+end
 
+
+function BypassTP(P)
+	repeat wait(0.5)
+		game.Players.LocalPlayer.Character.Humanoid:ChangeState(15)
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
+		task.wait()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
+	until (P.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 2000
+end
+
+-- EquipTool :
+function EquipTool(Toolse)
+    if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(Toolse) then
+        tool = game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(Toolse)
+        wait(0.5)
+        game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+    end
+end
+
+-- Haki :
+function AutoHaki()
+    if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+    end
+end
+
+-- Attack :
+local plr = game.Players.LocalPlayer
+local CbFw = getupvalues(require(plr.PlayerScripts.CombatFramework))
+local CbFw2 = CbFw[2]
+local CamShake = require(game.ReplicatedStorage.Util.CameraShaker)
+CamShake:Stop()
+
+function GetCurrentBlade() 
+    local p13 = CbFw2.activeController
+    local ret = p13.blades[1]
+    if not ret then return end
+    while ret.Parent~=game.Players.LocalPlayer.Character do ret=ret.Parent end
+    return ret
+end
+
+function AttackNoCD()
+    if not AutoFarmMasDevilFruit or AutoFarmMasGun then
+        if not Auto_Raid then
+            local AC = CbFw2.activeController
+            for i = 1, 1 do 
+                local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
+                    plr.Character,
+                    {plr.Character.HumanoidRootPart},
+                    60
+                )
+                local cac = {}
+                local hash = {}
+                for k, v in pairs(bladehit) do
+                    if v.Parent:FindFirstChild("HumanoidRootPart") and not hash[v.Parent] then
+                        table.insert(cac, v.Parent.HumanoidRootPart)
+                        hash[v.Parent] = true
+                    end
+                end
+                bladehit = cac
+                if #bladehit > 0 then
+                    local u8 = debug.getupvalue(AC.attack, 5)
+                    local u9 = debug.getupvalue(AC.attack, 6)
+                    local u7 = debug.getupvalue(AC.attack, 4)
+                    local u10 = debug.getupvalue(AC.attack, 7)
+                    local u12 = (u8 * 798405 + u7 * 727595) % u9
+                    local u13 = u7 * 798405
+                    (function()
+                        u12 = (u12 * u9 + u13) % 1099511627776
+                        u8 = math.floor(u12 / u9)
+                        u7 = u12 - u8 * u9
+                    end)()
+                    u10 = u10 + 1
+                    debug.setupvalue(AC.attack, 5, u8)
+                    debug.setupvalue(AC.attack, 6, u9)
+                    debug.setupvalue(AC.attack, 4, u7)
+                    debug.setupvalue(AC.attack, 7, u10)
+                    pcall(function()
+                        if plr.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then
+                            AC.animator.anims.basic[1]:Play(0.01,0.01,0.01)
+                            game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
+                            game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
+                            game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "")
+                        end
+                    end)
+                end
+            end
+        end
+    end
+end
+
+-- Delete Effect :
 getgenv().NoDieEffect = true
 
 if getgenv().NoDieEffect then
@@ -762,10 +815,56 @@ if getgenv().NoDieEffect then
     end
 end
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+spawn(function()
+    while wait() do
+        game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = false
+        game:GetService("ReplicatedStorage").Util.Sound.Storage.Other:FindFirstChild("LevelUp_Proxy"):Destroy()
+        game:GetService("ReplicatedStorage").Util.Sound.Storage.Other:FindFirstChild("LevelUp"):Destroy()
+        game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()  
+        game:GetService("ReplicatedStorage").Effect.Container.LevelUp:Destroy()
+    end
+end)
 
+if game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit') then
+    game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit'):Destroy()
+end
+
+if game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit') then
+    game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit'):Destroy()
+end
+
+-- Anti Kick 70%
+function AntiKick()
+    for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+        if v:IsA("LocalScript") then
+            if v.Name == "General" or v.Name == "Shiftlock"  or v.Name == "FallDamage" or v.Name == "4444" or v.Name == "CamBob" or v.Name == "JumpCD" or v.Name == "Looking" or v.Name == "Run" then
+                v:Destroy()
+            end
+        end
+     end
+     for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerScripts:GetDescendants()) do
+        if v:IsA("LocalScript") then
+            if v.Name == "RobloxMotor6DBugFix" or v.Name == "Clans"  or v.Name == "Codes" or v.Name == "CustomForceField" or v.Name == "MenuBloodSp"  or v.Name == "PlayerList" then
+                v:Destroy()
+            end
+        end
+    end
+end
+AntiKick()
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- Source : 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/Nghiavndeptraivcc/Orion-nhu-cut/main/Orion.Source')))()
 local Window = OrionLib:MakeWindow({Name = "Night Hub", HidePremium = false,IntroText = "Night Hub", SaveConfig = true, ConfigFolder = "Night Hub"})
+
+-- Tabs :
+
+local I = Window:MakeTab({
+	Name = "Info",
+	Icon = "rbxassetid://15541504459",
+	PremiumOnly = false
+})
 
 local G = Window:MakeTab({
 	Name = "General",
@@ -773,38 +872,38 @@ local G = Window:MakeTab({
 	PremiumOnly = false
 })
 
+local IQ = Window:MakeTab({
+	Name = "Item & Quest",
+	Icon = "rbxassetid://15541504459",
+	PremiumOnly = false
+})
+
+local TL = Window:MakeTab({
+	Name = "Teleport",
+	Icon = "rbxassetid://15541504459",
+	PremiumOnly = false
+})
+
+local S = Window:MakeTab({
+	Name = "Settings",
+	Icon = "rbxassetid://15541504459",
+	PremiumOnly = false
+})
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+local Section = G:AddSection({
+	Name = "Select Weapon"
+})
+
 G:AddDropdown({
 	Name = "Select Weapon",
 	Default = "Melee",
-	Options = {"Melee1", "Sword"},
+	Options = {"Melee", "Sword"},
 	Callback = function(Value)
-		Tool = Value
+		SelectWP = Value
 	end    
 })
-
-task.spawn(function()
-    while wait() do
-        pcall(function()
-            if Tool == "Melee" then
-                for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-                    if v.ToolTip == "Melee" then
-                        if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
-                            Tool = v.Name
-                        end
-                    end
-                end
-            elseif Tool == "Sword" then
-                for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-                    if v.ToolTip == "Sword" then
-                        if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
-                            Tool = v.Name
-                        end
-                    end
-                end
-            end
-        end)
-    end
-end)
 
 local Section = G:AddSection({
 	Name = "Farmming Toggle"
@@ -818,11 +917,314 @@ G:AddToggle({
 	end    
 })
 
+-- Item & Quest :
+
+-- Teleport :
+
+local Section = TL:AddSection({
+    Name = "Teleport Island"
+})
+
+
+if Sea1 then
+TL:AddDropdown({
+    Name = "Select Island",
+    Default = "",
+    Options = {"WindMill",
+    "Marine",
+    "Middle Town",
+    "Jungle",
+    "Pirate Village",
+    "Desert",
+    "Snow Island",
+    "MarineFord",
+    "Colosseum",
+    "Sky Island 1",
+    "Sky Island 2",
+    "Sky Island 3",
+    "Prison",
+    "Magma Village",
+    "Under Water Island",
+    "Fountain City",
+    "Shank Room",
+    "Mob Island",},
+    Flag = "Select Island",
+    Save = true,
+    Callback = function(Value)
+        _G.SelectIsland = Value
+    end    
+})
+end
+
+if Sea2 then
+TL:AddDropdown({
+    Name = "Select Island",
+    Default = "",
+    Options = {"The Cafe",
+    "Frist Spot",
+    "Dark Area",
+    "Flamingo Mansion",
+    "Flamingo Room",
+    "Green Zone",
+    "Factory",
+    "Colossuim",
+    "Zombie Island",
+    "Two Snow Mountain",
+    "Punk Hazard",
+    "Cursed Ship",
+    "Ice Castle",
+    "Forgotten Island",
+    "Ussop Island",
+    "Mini Sky Island"},
+    Flag = "Select Island",
+    Save = true,
+    Callback = function(Value)
+        _G.SelectIsland = Value
+    end    
+})
+end
+
+if Sea3 then
+TL:AddDropdown({
+    Name = "Select Island",
+    Default = "",
+    Options = {"Mansion",
+    "Port Town",
+    "Great Tree",
+    "Castle On The Sea",
+    "MiniSky", 
+    "Hydra Island",
+    "Floating Turtle",
+    "Haunted Castle",
+    "Ice Cream Island",
+    "Peanut Island",
+    "Cake Island",
+    "Cocoa Island",
+    "Tiki Outpost New",
+    "Candy Island New⛄"},
+    Flag = "Select Island",
+    Save = true,
+    Callback = function(Value)
+        _G.SelectIsland = Value
+    end    
+})
+end
+
+TL:AddButton(
+    {
+        Name = "Teleport To Island",
+        Callback = function()
+            if _G.SelectIsland == "WindMill" then
+                Teleport(CFrame.new(979.79895019531, 16.516613006592, 1429.0466308594))
+            elseif _G.SelectIsland == "Marine" then
+                Teleport(CFrame.new(-2566.4296875, 6.8556680679321, 2045.2561035156))
+            elseif _G.SelectIsland == "Middle Town" then
+                Teleport(CFrame.new(-690.33081054688, 15.09425163269, 1582.2380371094))
+            elseif _G.SelectIsland == "Jungle" then
+                Teleport(CFrame.new(-1612.7957763672, 36.852081298828, 149.12843322754))
+            elseif _G.SelectIsland == "Pirate Village" then
+                Teleport(CFrame.new(-1181.3093261719, 4.7514905929565, 3803.5456542969))
+            elseif _G.SelectIsland == "Desert" then
+                Teleport(CFrame.new(944.15789794922, 20.919729232788, 4373.3002929688))
+            elseif _G.SelectIsland == "Snow Island" then
+                Teleport(CFrame.new(1347.8067626953, 104.66806030273, -1319.7370605469))
+            elseif _G.SelectIsland == "MarineFord" then
+                Teleport(CFrame.new(-4914.8212890625, 50.963626861572, 4281.0278320313))
+            elseif _G.SelectIsland == "Colosseum" then
+                Teleport(CFrame.new(-1427.6203613281, 7.2881078720093, -2792.7722167969))
+            elseif _G.SelectIsland == "Sky Island 1" then
+                Teleport(CFrame.new(-4869.1025390625, 733.46051025391, -2667.0180664063))
+            elseif _G.SelectIsland == "Sky Island 2" then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
+                    "requestEntrance",
+                    Vector3.new(-4607.82275, 872.54248, -1667.55688)
+                )
+            elseif _G.SelectIsland == "Sky Island 3" then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
+                    "requestEntrance",
+                    Vector3.new(-7894.6176757813, 5547.1416015625, -380.29119873047)
+                )
+            elseif _G.SelectIsland == "Prison" then
+                Teleport(CFrame.new(4875.330078125, 5.6519818305969, 734.85021972656))
+            elseif _G.SelectIsland == "Magma Village" then
+                Teleport(CFrame.new(-5247.7163085938, 12.883934020996, 8504.96875))
+            elseif _G.SelectIsland == "Under Water Island" then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
+                    "requestEntrance",
+                    Vector3.new(61163.8515625, 11.6796875, 1819.7841796875)
+                )
+            elseif _G.SelectIsland == "Fountain City" then
+                Teleport(CFrame.new(5127.1284179688, 59.501365661621, 4105.4458007813))
+            elseif _G.SelectIsland == "Shank Room" then
+                Teleport(CFrame.new(-1442.16553, 29.8788261, -28.3547478))
+            elseif _G.SelectIsland == "Mob Island" then
+                Teleport(CFrame.new(-2850.20068, 7.39224768, 5354.99268))
+            elseif _G.SelectIsland == "The Cafe" then
+                Teleport(CFrame.new(-380.47927856445, 77.220390319824, 255.82550048828))
+            elseif _G.SelectIsland == "Frist Spot" then
+                Teleport(CFrame.new(-11.311455726624, 29.276733398438, 2771.5224609375))
+            elseif _G.SelectIsland == "Dark Area" then
+                Teleport(CFrame.new(3780.0302734375, 22.652164459229, -3498.5859375))
+            elseif _G.SelectIsland == "Flamingo Mansion" then
+                Teleport(CFrame.new(-483.73370361328, 332.0383605957, 595.32708740234))
+            elseif _G.SelectIsland == "Flamingo Room" then
+                Teleport(CFrame.new(2284.4140625, 15.152037620544, 875.72534179688))
+            elseif _G.SelectIsland == "Green Zone" then
+                Teleport(CFrame.new(-2448.5300292969, 73.016105651855, -3210.6306152344))
+            elseif _G.SelectIsland == "Factory" then
+                Teleport(CFrame.new(424.12698364258, 211.16171264648, -427.54049682617))
+            elseif _G.SelectIsland == "Colossuim" then
+                Teleport(CFrame.new(-1503.6224365234, 219.7956237793, 1369.3101806641))
+            elseif _G.SelectIsland == "Zombie Island" then
+                Teleport(CFrame.new(-5622.033203125, 492.19604492188, -781.78552246094))
+            elseif _G.SelectIsland == "Two Snow Mountain" then
+                Teleport(CFrame.new(753.14288330078, 408.23559570313, -5274.6147460938))
+            elseif _G.SelectIsland == "Punk Hazard" then
+                Teleport(CFrame.new(-6127.654296875, 15.951762199402, -5040.2861328125))
+            elseif _G.SelectIsland == "Cursed Ship" then
+                Teleport(CFrame.new(923.40197753906, 125.05712890625, 32885.875))
+            elseif _G.SelectIsland == "Ice Castle" then
+                Teleport(CFrame.new(6148.4116210938, 294.38687133789, -6741.1166992188))
+            elseif _G.SelectIsland == "Forgotten Island" then
+                Teleport(CFrame.new(-3032.7641601563, 317.89672851563, -10075.373046875))
+            elseif _G.SelectIsland == "Ussop Island" then
+                Teleport(CFrame.new(4816.8618164063, 8.4599885940552, 2863.8195800781))
+            elseif _G.SelectIsland == "Mini Sky Island" then
+                Teleport(CFrame.new(-288.74060058594, 49326.31640625, -35248.59375))
+            elseif _G.SelectIsland == "Great Tree" then
+                Teleport(CFrame.new(2681.2736816406, 1682.8092041016, -7190.9853515625))
+            elseif _G.SelectIsland == "Castle On The Sea" then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
+                    "requestEntrance",
+                    Vector3.new(
+                        -5071.82324,
+                        314.858734,
+                        -3150.69922,
+                        -0.392243683,
+                        -1.68831065e-08,
+                        -0.919861317,
+                        2.14809548e-09,
+                        1,
+                        -1.9269951e-08,
+                        0.919861317,
+                        -9.53446655e-09,
+                        -0.392243683
+                    )
+                )
+            elseif _G.SelectIsland == "MiniSky" then
+                Teleport(CFrame.new(-260.65557861328, 49325.8046875, -35253.5703125))
+            elseif _G.SelectIsland == "Port Town" then
+                Teleport(CFrame.new(-290.7376708984375, 6.729952812194824, 5343.5537109375))
+            elseif _G.SelectIsland == "Hydra Island" then
+                Teleport(CFrame.new(5228.8842773438, 604.23400878906, 345.0400390625))
+            elseif _G.SelectIsland == "Floating Turtle" then
+                Teleport(CFrame.new(-13274.528320313, 531.82073974609, -7579.22265625))
+            elseif _G.SelectIsland == "Mansion" then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
+                    "requestEntrance",
+                    Vector3.new(-12471.169921875, 374.94024658203, -7551.677734375)
+                )
+            elseif _G.SelectIsland == "Haunted Castle" then
+                Teleport(CFrame.new(-9515.3720703125, 164.00624084473, 5786.0610351562))
+            elseif _G.SelectIsland == "Ice Cream Island" then
+                Teleport(CFrame.new(-902.56817626953, 79.93204498291, -10988.84765625))
+            elseif _G.SelectIsland == "Peanut Island" then
+                Teleport(CFrame.new(-2062.7475585938, 50.473892211914, -10232.568359375))
+            elseif _G.SelectIsland == "Cake Island" then
+                Teleport(CFrame.new(-1884.7747802734375, 19.327526092529297, -11666.8974609375))
+            elseif _G.SelectIsland == "Cocoa Island" then
+                Teleport(CFrame.new(87.94276428222656, 73.55451202392578, -12319.46484375))
+            elseif _G.SelectIsland == "Candy Island New⛄" then
+                Teleport(CFrame.new(-1014.4241943359375, 149.11068725585938, -14555.962890625))
+            elseif _G.SelectIsland == "Tiki Outpost New" then
+                Teleport(
+                    CFrame.new(
+                        -16101.1885,
+                        12.8422165,
+                        380.942291,
+                        0.194113985,
+                        1.39194061e-08,
+                        -0.980978966,
+                        -9.82904691e-09,
+                        1,
+                        1.22443504e-08,
+                        0.980978966,
+                        7.26528837e-09,
+                        0.194113985
+                    )
+                )
+            else
+                _G.StopTween = true
+                wait(0.5)
+                _G.StopTween = false
+            end
+        end
+    }
+)
+
+
+TL:AddButton({
+	Name = "Stop Teleport",
+	Callback = function()
+      	_G.StopTween = true
+        wait(0.5)
+        _G.StopTween = false
+  	end    
+})
+
+-- SETTINGS :
+
+local Section = S:AddSection({
+	Name = "Bring Mob"
+})
+
+S:AddToggle({
+	Name = "Bring Monster",
+	Default = true,
+	Callback = function(Value)
+		_G.BringMonster = Value
+	end    
+})
+
+local Section = S:AddSection({
+	Name = "FastAttack"
+})
+
+S:AddToggle({
+	Name = "Fast Attack",
+	Default = true,
+	Callback = function(Value)
+		_G.FastAttack = Value
+	end    
+})
+
+S:AddDropdown({
+	Name = "FastAttack Delay",
+	Default = "Fast",
+	Options = {"Super Fast", "Fast", "Normal", "Slow"},
+	Callback = function(Value)
+		_G.FastAttackDelay = Value
+	end    
+})
+
+
+
+
+
+
+
+
+
+
+
+------ Codes :
+
+
 spawn(function()
     while wait() do
         if _G.LevelFarm then
             pcall(function()
-                Quest()
+                QuestCheck()
                 local QuestTitle = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
                 if not string.find(QuestTitle, NameMon) then
                     BringMob = false
@@ -830,10 +1232,10 @@ spawn(function()
                 end
                 if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
                     BringMob = false
-                    Quest()
+                    QuestCheck()
                     if BypassTP then
                     if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMon.Position).Magnitude > 2000 then
-                    Bypass(CFrameQuest)
+                    BypassTP(CFrameQuest)
                     elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMon.Position).Magnitude < 2000 then
                         Tween(CFrameQuest)
                     end
@@ -844,14 +1246,14 @@ spawn(function()
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest",NameQuest,LevelQuest)
                     end
                 elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
-                    Quest()
+                    QuestCheck()
                     if game:GetService("Workspace").Enemies:FindFirstChild(Mon) then
                         for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                             if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
                                 if v.Name == Mon then
                                     if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) then
                                         repeat task.wait()
-                                            EquipTool(Tool)
+                                            EquipTool(SelectWP)
                                             AutoHaki()                                            
                                             PosMon = v.HumanoidRootPart.CFrame
                                             Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
@@ -878,5 +1280,109 @@ spawn(function()
                 end
             end)
         end
+    end
+end)
+
+spawn(
+    function()
+        while task.wait() do
+            if _G.BringMonster then
+                QuestCheck()
+                for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                    if
+                        _G.LevelFarm and BringMob and v.Name == Mon and
+                            (Mon == "Factory Staff" or Mon == "Monkey" or Mon == "Dragon Crew Warrior" or
+                                Mon == "Dragon Crew Archer") and
+                            v:FindFirstChild("Humanoid") and
+                            v:FindFirstChild("HumanoidRootPart") and
+                            v.Humanoid.Health > 0 and
+                            (v.HumanoidRootPart.Position -
+                                game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <=
+                                350
+                     then
+                        v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+                        v.HumanoidRootPart.CFrame = PosMon
+                        v.Humanoid:ChangeState(14)
+                        v.HumanoidRootPart.CanCollide = false
+                        v.Head.CanCollide = false
+                        if v.Humanoid:FindFirstChild("Animator") then
+                            v.Humanoid.Animator:Destroy()
+                        end
+                        sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+                    elseif
+                    _G.LevelFarm and BringMob and v.Name == Mon and
+                            v:FindFirstChild("Humanoid") and
+                            v:FindFirstChild("HumanoidRootPart") and
+                            v.Humanoid.Health > 0 and
+                            (v.HumanoidRootPart.Position -
+                                game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <=
+                                350
+                     then
+                        v.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+                        v.HumanoidRootPart.CFrame = PosMon
+                        v.Humanoid:ChangeState(14)
+                        v.HumanoidRootPart.CanCollide = false
+                        v.Head.CanCollide = false
+                        if v.Humanoid:FindFirstChild("Animator") then
+                            v.Humanoid.Animator:Destroy()
+                        end
+                        sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+                    end
+                end
+            end
+        end
+    end
+)
+
+spawn(function()
+	while wait(.5) do
+		pcall(function()
+			if _G.FastAttack then
+				repeat wait(_G.FastAttackDelay)
+					AttackNoCD()
+				until not _G.FastAttack
+			end
+		end)
+	end
+end)
+
+spawn(function()
+    while wait(.1) do
+        if _G.FastAttackDelay then
+            pcall(function()
+                if _G.FastAttackDelay == "Super Fast" then
+                    _G.FastAttackDelay = 0.05
+                elseif _G.FastAttackDelay == "Fast" then
+                    _G.FastAttackDelay = 0.15
+                elseif _G.FastAttackDelay == "Normal" then
+                    _G.FastAttackDelay = 0.25
+                elseif _G.FastAttackDelay == "Low" then
+                    _G.FastAttackDelay = 0.5
+                end
+            end)
+        end
+    end
+end)
+task.spawn(function()
+    while wait() do
+        pcall(function()
+            if SelectWP == "Melee" then
+                for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                    if v.ToolTip == "Melee" then
+                        if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+                            SelectWP = v.Name
+                        end
+                    end
+                end
+            elseif SelectWP == "Sword" then
+                for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                    if v.ToolTip == "Sword" then
+                        if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+                            SelectWP = v.Name
+                        end
+                    end
+                end
+            end
+        end)
     end
 end)
