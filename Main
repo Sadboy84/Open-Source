@@ -206,7 +206,7 @@ function Quest()
             CFrameQuest = CFrame.new(5259.81982, 37.3500175, 4050.0293, 0.087131381, 0, 0.996196866, 0, 1, 0, -0.996196866, 0, 0.087131381)
             CFrameMob = CFrame.new(5441.95166015625, 42.50205993652344, 4950.09375)
         end
-    elseif SecondsWorldthen
+    elseif SecondsWorld then
         if Level == 700 or Level <= 724 then
             Mob = "Raider"
             LevelQuest = 1
