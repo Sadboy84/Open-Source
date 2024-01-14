@@ -791,8 +791,7 @@ spawn(function()
                     for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                         if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
                             if v.Name == Mon then
-                                repeat
-                                    task.wait()
+                                repeat task.wait()
                                     ChimBlack()
                                     EquipTool(SelectWeapon)
                                     Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
