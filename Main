@@ -798,33 +798,19 @@ if game.Players.LocalPlayer.Name == "Night_19372" then
         while wait() do
             if _G.LevelFarm then
                 pcall(function()
-                    local QuestTitle = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
-                    if not string.find(QuestTitle, NameMob) then
-                        BringMob = false
+                    Quest()
+                    if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-                    end
-                    if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
-                        BringMob = false
-                        Quest()
-                        if BypassTP then
-                            if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMob.Position).Magnitude > 1500 then
-                                Bypass(CFrameMob)
-                            elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMob.Position).Magnitude < 1500 then
-                                Tween(CFrameQuest)
-                            end
-                        else
-                            Tween(CFrameQuest)
-                        end
-                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude <= 20 then
+                        Tween(CFrameQuest)
+                        if (CFrameQuest.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 20 then
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest",NameQuest,LevelQuest)
                         end
                     elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
-                        Quest()
-                        if game:GetService("Workspace").Enemies:FindFirstChild(Mon) then
-                            for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if game:GetService("Workspace").Enemies:FindFirstChild(Mob) then
+                            for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                 if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                                    if v.Name == Mon then
-                                        if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) then
+                                    if v.Name == Mob then
+                                        if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMob) then
                                             repeat task.wait()
                                                 EquipTool(SelectWeapon)
                                                 ChimBlack()                                            
@@ -848,8 +834,8 @@ if game.Players.LocalPlayer.Name == "Night_19372" then
                         else
                             Tween(CFrameMob)
                             BringMob = false
-                            if game:GetService("ReplicatedStorage"):FindFirstChild(Mon) then
-                                Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Mon).HumanoidRootPart.CFrame * CFrame.new(0,10,0))
+                            if game:GetService("ReplicatedStorage"):FindFirstChild(Mob) then
+                                Tween(game:GetService("ReplicatedStorage"):FindFirstChild(Mob).HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                             end
                         end
                     end
@@ -857,7 +843,6 @@ if game.Players.LocalPlayer.Name == "Night_19372" then
             end
         end
     end)
-    
 else
     game.Players.LocalPlayer:Kick("You Are Blacklist ' How do run? '")
 end
