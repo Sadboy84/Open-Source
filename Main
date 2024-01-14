@@ -734,7 +734,7 @@ local Section = G:AddSection({
     Name = "Select Weapon"
 })
 
-local WeaponList = {"Melee", "Sword", "Fruit", "Gun"}
+local WeaponList = {"Melee", "Sword"}
 G:AddDropdown({
     Name = "Select Weapon",
     Default = "",
@@ -819,3 +819,26 @@ spawn(function()
     end
 end)
 
+task.spawn(function()
+    while wait() do
+        pcall(function()
+            if SelectWeapon == "Melee" then
+                for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                    if v.ToolTip == "Melee" then
+                        if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+                            SelectWeapon = v.Name
+                        end
+                    end
+                end
+            elseif SelectWeapon == "Sword" then
+                for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                    if v.ToolTip == "Sword" then
+                        if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+                            SelectWeapon = v.Name
+                        end
+                    end
+                end
+            end
+        end)
+    end
+end)
