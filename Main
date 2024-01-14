@@ -792,7 +792,7 @@ spawn(function()
                         Tween(CFrameQuest)
                     end
                     if (CFrameQuest.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, QuestLv)
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, LevelQuest)
                     end
                 elseif string.find(questTitle, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
                     for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
