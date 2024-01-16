@@ -665,7 +665,7 @@ spawn(function()
     pcall(function()
         game:GetService("RunService").Stepped:Connect(function()
             if _G.LevelFarm or NoCLip == true then
-                for i,v in pairs(game:GetService("Players").Localplayer.Character:GetDescendants()) do
+                for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
                     if v:IsA("BasePart") then
                         v.CanCollide = false
                     end
