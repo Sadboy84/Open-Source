@@ -628,18 +628,19 @@ function QuestCheck()
     end
 
 function Tween(Pos)
-    Distance = (Pos.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+    Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     if game:GetService("Players").LocalPlayer.Character.Humanoid.Sit == true then
         game:GetService("Players").LocalPlayer.Character.Humanoid.Sit = false
     end
     pcall(function()
-        tween = game:GetService("TweenService"):Create(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(Distance/300, Enum.EasingStyle.Linear) {CFrame = Pos})
+        tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/300, Enum.EasingStyle.Linear),{CFrame = Pos})
     end)
     tween:Play()
     if Distance <= 300 then
-        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
+        tween:Cancel()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
     end
-    if StopTween == true then
+    if _G.StopTween == true then
         tween:Cancel()
         NoCLip = false
     end
