@@ -803,6 +803,19 @@ function AttackNoCD()
     end
 end
 
+function CancelTween(FUCK)
+    if not FUCK then
+        _G.StopTween = true
+        wait()
+        Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+        wait()
+        if game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
+        end
+        _G.StopTween = false
+        _G.Clip = false
+    end
+end
 
 function TweenIsland()
     if _G.SelectIsland == "WindMill" then
@@ -963,6 +976,7 @@ G:AddToggle({
 	Default = false,
 	Callback = function(Value)
 		_G.LevelFarm = Value
+        CancelTween(_G.LevelFarm)
 	end    
 })
 
