@@ -8,7 +8,7 @@ else
     game:GetService("Players").LocalPlayer:Kick("Support Only Blox Fruits")
 end
 
-function QuestCheck() -- Tool Google On TOP
+function QuestCheck()
     MyLevel = game: GetService("Players").LocalPlayer.Data.Level.Value
     if Sea1 then
     if MyLevel == 1 or MyLevel <= 9 then
@@ -628,61 +628,44 @@ function QuestCheck() -- Tool Google On TOP
     end
 
 function Tween(Pos)
-    Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
-        game.Players.LocalPlayer.Character.Humanoid.Sit = false
+    Distance = (Pos.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+    if game:GetService("Players").LocalPlayer.Character.Humanoid.Sit == true then
+        game:GetService("Players").LocalPlayer.Character.Humanoid.Sit = false
     end
     pcall(function()
-        fly = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(Distance/300, Enum.EasingStyle.Linear), {CFrame = Pos})
+        tween = game:GetService("TweenService"):Create(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(Distance/300, Enum.EasingStyle.Linear) {CFrame = Pos})
     end)
-    fly:Play()
+    tween:Play()
     if Distance <= 300 then
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos2
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
     end
     if StopTween == true then
-        fly:Cancel()
-        NoClip = false
+        tween:Cancel()
+        NoCLip = false
     end
-end
-
-function Teleport(P1)
-    local Distance = (P1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    if Distance >= 1 then
-    Speed = 300
-    end
-        game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear), {CFrame = P1}):Play()
-    if _G.CancelTween2 then
-        game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear), {CFrame = P1}):Cancel()
-    end
-    NoClip = true
-    wait(Distance/Speed)
-    NoClip = false
 end
 
 spawn(function()
     while task.wait() do
         pcall(function()
-            if _G.LevelFarm or NoClip == true then
+            if _G.LevelFarm or NoCLip == true then
                 if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
                     local Noclip = Instance.new("BodyVelocity")
-                    Noclip.Name = "BodyClip"
-                    Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
-                    Noclip.MaxForce = Vector3.new(100000, 100000, 100000)
-                    Noclip.Velocity = Vector3.new(0, 0, 0)
-                end
-            else
-                game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
+					Noclip.Name = "BodyClip"
+				    Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
+					Noclip.MaxForce = Vector3.new(100000,100000,100000)
+					Noclip.Velocity = Vector3.new(0,0,0)
+				end
             end
         end)
     end
 end)
 
-
 spawn(function()
     pcall(function()
         game:GetService("RunService").Stepped:Connect(function()
-            if _G.LevelFarm or NoClip == true then
-                for i, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+            if _G.LevelFarm or NoCLip == true then
+                for i,v in pairs(game:GetService("Players").Localplayer.Character:GetDescendants()) do
                     if v:IsA("BasePart") then
                         v.CanCollide = false
                     end
@@ -692,121 +675,131 @@ spawn(function()
     end)
 end)
 
+function Bypass(P)
+    repeat wait(0.5)
+		game.Players.LocalPlayer.Character.Humanoid:ChangeState(15)
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
+		task.wait()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
+	until (P.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 2000
+end
+
 function EquipTool(Toolse)
-    if game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe) then
-        Bucu = game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe)
+    if game:GetService("Players").LocalPlayer.BackPack:FindFirstChild(Toolse) then
+        local Memaybeo = game:GetService("Players").LocalPlayer.BackPack:FindFirstChild(Toolse)
         wait(0.5)
-        game.Players.LocalPlayer.Character.Humanoid:EquipTool(Bucu)
+        game:GetService("Players").LocalPlayer.Humanoid:EquipTool(Memaybeo)
     end
 end
 
-function ChimBlack()
+function chimden()
     if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
     end
 end
 
-function Bypass(TP)
-    repeat wait(0.5)
-		game.Players.LocalPlayer.Character.Humanoid:ChangeState(15)
-		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = TP
-		task.wait()
-		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = TP
-	until (TP.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 2000
-end
-
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/Nghiavndeptraivcc/Orion-nhu-cut/main/Orion.Source')))()
-local Window = OrionLib:MakeWindow({
-    Name = "Night Hub",
-    HidePremium = false,
-    IntroText = "Night Library",
-    SaveConfig = true,
-    ConfigFolder = "Night Hub"
-})
+local Window = OrionLib:MakeWindow({Name = "Night Hub", HidePremium = false,IntroText = "Night Library", SaveConfig = true, ConfigFolder = "Night Hub"})
 
 local G = Window:MakeTab({
-    Name = "General",
-    Icon = "rbxassetid://15541504459",
-    PremiumOnly = false
+	Name = "General",
+	Icon = "rbxassetid://15541504459",
+	PremiumOnly = false
 })
 
 local Section = G:AddSection({
-    Name = "Select Weapon"
+	Name = "Select Weapon"
 })
 
-local WeaponList = {"Melee", "Sword"}
 G:AddDropdown({
-    Name = "Select Weapon",
-    Default = "",
-    Options = WeaponList,
-    Flag = "Select Weapon",
-    Save = true,
-    Callback = function(Value)
-        SelectWeapon = Value
-    end
+	Name = "Select Weapon",
+	Default = "Melee",
+	Options = {"Melee", "Sword"},
+	Callback = function(Value)
+		SelectWeapon = Value
+	end    
 })
 
-local FarmSection = G:AddSection({
-    Name = "Toggle Farm"
-})
+task.spawn(function()
+    while wait() do
+        pcall(function()
+            if SelectWP == "Melee" then
+                for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                    if v.ToolTip == "Melee" then
+                        if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+                            SelectWP = v.Name
+                        end
+                    end
+                end
+            elseif SelectWP == "Sword" then
+                for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                    if v.ToolTip == "Sword" then
+                        if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+                            SelectWP = v.Name
+                        end
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+G:AddParagraph("TOGGLE FARM","TOUCH THE TOGGLE TO FARM YOU LIKE")
 
 G:AddToggle({
-    Name = "Fully Farm",
-    Default = false,
-    Callback = function(Value)
-        _G.LevelFarm = Value
-    end
+	Name = "Auto Farm Level",
+	Default = false,
+	Save = true,
+	Flag = "Level Farm",
+	Callback = function(Value)
+		_G.LevelFarm = Value
+	end    
 })
-
-G:AddToggle({
-    Name = "Bypass TP",
-    Default = false,
-    Callback = function(Value)
-        BypassTP = Value
-    end
-})
-
 
 spawn(function()
     while task.wait() do
         if _G.LevelFarm then
             pcall(function()
-                QuestCheck()
-                local questTitle = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
-                if not string.find(questTitle, NameMon) or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
+                CheckQuest()
+                if not string.find(game:GetService("Players").Localplayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or game:GetService("Players").Localplayer.PlayerGui.Main.Quest.Visible == false then
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                     if BypassTP then
-                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMon.Position).Magnitude > 2500 then
+                        if (game:GetService("Players").Localplayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude > 2000 then
                             Bypass(CFrameMon)
-                        elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameMon.Position).Magnitude < 2500 then
+                        elseif (game:GetService("Players").Localplayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude < 2000 then
                             Tween(CFrameQuest)
                         end
                     else
                         Tween(CFrameQuest)
                     end
-                    if (CFrameQuest.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, LevelQuest)
+                    if (CFrameQuest.Position - game:GetService("Players").Localplayer.Character.HumanoidRootPart.Position).Magnitude < 20 then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest",NameQuest,LevelQuest)
                     end
-                elseif string.find(questTitle, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
-                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                            if v.Name == Mon then
-                                repeat task.wait()
-                                    ChimBlack()
-                                    EquipTool(SelectWeapon)
-                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                    v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-                                    v.Humanoid.WalkSpeed = 0
-                                    v.HumanoidRootPart.CanCollide = false
-                                    PosMon = v.HumanoidRootPart.CFrame
-                                    BringMob = true
-                                until not _G.LevelFarm or not v.Parent or v.Humanoid.Health <= 0 or not game:GetService("Workspace").Enemies:FindFirstChild(v.Name) or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                elseif game:GetService("Players").Localplayer.PlayerGui.Main.Quest.Visible == true then
+                    if game:GetService("Workspace").Enemies:FindFirstChild(Mon) then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                if v.Name == Mon then
+                                    repeat task.wait()
+                                        Equiptool(SelectWeapon)
+                                        Chimden()
+                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.Head.CanCollide = false
+                                        v.Humanoid.WalkSpeed = 0
+                                        v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
+                                        PosMon = v.HumanoidRootPart.CFrame
+                                        BringMob = true
+                                    until not _G.LevelFarm or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart") or not v:FindFirstChild("Humanoid") or game:GetService("Players").Localplayer.PlayerGui.Main.Quest.Visible == false
+                                else
+                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                                end
                             end
                         end
                     end
-                    BringMob = false
-                    for i, v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
-                        if string.find(v.Name, NameMon) then
+                end
+                    for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
+                        if string.find(v.Name,NameMon) then
                             if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude >= 10 then
                                 Tween(v.CFrame * CFrame.new(2, 20, 2))
                             end
@@ -818,26 +811,6 @@ spawn(function()
     end
 end)
 
-task.spawn(function()
-    while wait() do
-        pcall(function()
-            if SelectWeapon == "Melee" then
-                for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-                    if v.ToolTip == "Melee" then
-                        if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
-                            SelectWeapon = v.Name
-                        end
-                    end
-                end
-            elseif SelectWeapon == "Sword" then
-                for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-                    if v.ToolTip == "Sword" then
-                        if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
-                            SelectWeapon = v.Name
-                        end
-                    end
-                end
-            end
-        end)
-    end
-end)
+
+
+
