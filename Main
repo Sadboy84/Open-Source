@@ -628,49 +628,58 @@ function QuestCheck()
     end
 
 function Tween(Pos)
-    Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    if game:GetService("Players").LocalPlayer.Character.Humanoid.Sit == true then
-        game:GetService("Players").LocalPlayer.Character.Humanoid.Sit = false
+    local Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+
+    if game.Players.LocalPlayer.Character.Humanoid.Sit then
+        game.Players.LocalPlayer.Character.Humanoid.Sit = false
     end
+
     pcall(function()
-        tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/300, Enum.EasingStyle.Linear),{CFrame = Pos})
+        local tween = game:GetService("TweenService"):Create(
+            game.Players.LocalPlayer.Character.HumanoidRootPart,
+            TweenInfo.new(Distance/300, Enum.EasingStyle.Linear),
+            {CFrame = Pos}
+        )
+        tween:Play()
+
+        if Distance <= 300 or _G.StopTween then
+            tween:Cancel()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
+            NoClip = false
+        end
     end)
-    tween:Play()
-    if Distance <= 300 then
-        tween:Cancel()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
-    end
-    if _G.StopTween == true then
-        tween:Cancel()
-        NoClip = false
-    end
 end
 
 function Teleport(P)
     local Distance = (P.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    if Distance >= 1 then
-        Speed = 300
-    end
+    local Speed = Distance >= 1 and 300 or 1
+
     pcall(function()
-        teleport = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear), {CFrame = P})
-    end)
-    teleport:Play()
-    if _G.StopTween == true then
-        teleport:Cancel()
+        local teleport = game:GetService("TweenService"):Create(
+            game.Players.LocalPlayer.Character.HumanoidRootPart,
+            TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
+            {CFrame = P}
+        )
+        teleport:Play()
+
+        if _G.StopTween then
+            teleport:Cancel()
+            NoClip = false
+        end
+
+        NoClip = true
+        wait(Distance/Speed)
         NoClip = false
-    end
-    NoClip = true
-    wait(Distance/Speed)
-    NoClip = false
+    end)
 end
 
 spawn(function()
     while task.wait() do
         if _G.LevelFarm or NoClip then
-            if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
+            if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
                 local Noclip = Instance.new("BodyVelocity")
                 Noclip.Name = "BodyClip"
-                Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
+                Noclip.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
                 Noclip.MaxForce = Vector3.new(100000, 100000, 100000)
                 Noclip.Velocity = Vector3.new(0, 0, 0)
             end
@@ -681,7 +690,7 @@ end)
 spawn(function()
     game:GetService("RunService").Stepped:Connect(function()
         if _G.LevelFarm or NoClip then
-            for _, part in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+            for _, part in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
                 if part:IsA("BasePart") then
                     part.CanCollide = false
                 end
@@ -691,24 +700,26 @@ spawn(function()
 end)
 
 function BP(P)
-	repeat wait(0.5)
-		game.Players.LocalPlayer.Character.Humanoid:ChangeState(15)
-		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
-		task.wait()
-		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
-	until (P.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 2000
+    repeat
+        wait(0.5)
+        game.Players.LocalPlayer.Character.Humanoid:ChangeState(15)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
+        task.wait()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
+    until (P.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 2000
 end
 
 function EquipTool(Toolse)
-    if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(Toolse) then
-        tool = game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(Toolse)
+    local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(Toolse)
+    
+    if tool then
         wait(0.5)
         game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
     end
 end
 
 function AutoHaki()
-    if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
+    if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
     end
 end
@@ -722,8 +733,15 @@ CamShake:Stop()
 function GetCurrentBlade() 
     local p13 = CbFw2.activeController
     local ret = p13.blades[1]
-    if not ret then return end
-    while ret.Parent~=game.Players.LocalPlayer.Character do ret=ret.Parent end
+
+    if not ret then
+        return
+    end
+
+    while ret.Parent ~= game.Players.LocalPlayer.Character do
+        ret = ret.Parent
+    end
+
     return ret
 end
 
@@ -731,21 +749,26 @@ function AttackNoCD()
     if not AutoFarmMasDevilFruit or AutoFarmMasGun then
         if not Auto_Raid then
             local AC = CbFw2.activeController
+
             for i = 1, 1 do 
                 local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
                     plr.Character,
                     {plr.Character.HumanoidRootPart},
                     60
                 )
+
                 local cac = {}
                 local hash = {}
+
                 for k, v in pairs(bladehit) do
                     if v.Parent:FindFirstChild("HumanoidRootPart") and not hash[v.Parent] then
                         table.insert(cac, v.Parent.HumanoidRootPart)
                         hash[v.Parent] = true
                     end
                 end
+
                 bladehit = cac
+
                 if #bladehit > 0 then
                     local u8 = debug.getupvalue(AC.attack, 5)
                     local u9 = debug.getupvalue(AC.attack, 6)
@@ -753,20 +776,23 @@ function AttackNoCD()
                     local u10 = debug.getupvalue(AC.attack, 7)
                     local u12 = (u8 * 798405 + u7 * 727595) % u9
                     local u13 = u7 * 798405
+
                     (function()
                         u12 = (u12 * u9 + u13) % 1099511627776
                         u8 = math.floor(u12 / u9)
                         u7 = u12 - u8 * u9
                     end)()
+
                     u10 = u10 + 1
                     debug.setupvalue(AC.attack, 5, u8)
                     debug.setupvalue(AC.attack, 6, u9)
                     debug.setupvalue(AC.attack, 4, u7)
                     debug.setupvalue(AC.attack, 7, u10)
+
                     pcall(function()
                         if plr.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then
-                            AC.animator.anims.basic[1]:Play(0.01,0.01,0.01)
-                            game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
+                            AC.animator.anims.basic[1]:Play(0.01, 0.01, 0.01)
+                            game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange", tostring(GetCurrentBlade()))
                             game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
                             game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "")
                         end
@@ -776,6 +802,7 @@ function AttackNoCD()
         end
     end
 end
+
 
 function TweenIsland()
     if _G.SelectIsland == "WindMill" then
@@ -1254,6 +1281,19 @@ local slashHit = game:GetService("ReplicatedStorage").Assets:FindFirstChild('Sla
 if slashHit then
     slashHit:Destroy()
 end
+
+_G.DisDieffect = true
+spawn(function()
+    while _G.DisDieffect do wait()
+        for i, v in pairs(game:GetService("Workspace")["_WorldOrigin"]:GetChildren()) do
+            pcall(function()
+                if v.Name == "CurvedRing" or v.Name == "SlashHit" or v.Name == "SwordSlash" then
+                    v:Destroy()
+                end
+            end)
+        end
+    end
+end)
 
 function AntiKick()
     for _, descendant in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
