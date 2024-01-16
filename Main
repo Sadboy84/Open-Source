@@ -761,55 +761,53 @@ spawn(function()
         if _G.LevelFarm then
             pcall(function()
                 CheckQuest()
-                if not string.find(game:GetService("Players").Localplayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or game:GetService("Players").Localplayer.PlayerGui.Main.Quest.Visible == false then
+                local questTitle = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
+                if not string.find(questTitle, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                     if BypassTP then
-                        if (game:GetService("Players").Localplayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude > 2000 then
+                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude > 2000 then
                             Bypass(CFrameMon)
-                        elseif (game:GetService("Players").Localplayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude < 2000 then
+                        elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQuest.Position).Magnitude < 2000 then
                             Tween(CFrameQuest)
                         end
                     else
                         Tween(CFrameQuest)
                     end
-                    if (CFrameQuest.Position - game:GetService("Players").Localplayer.Character.HumanoidRootPart.Position).Magnitude < 20 then
-                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest",NameQuest,LevelQuest)
+                    if (CFrameQuest.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 20 then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, LevelQuest)
                     end
-                elseif game:GetService("Players").Localplayer.PlayerGui.Main.Quest.Visible == true then
+                elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
                     if game:GetService("Workspace").Enemies:FindFirstChild(Mon) then
-                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                                if v.Name == Mon then
-                                    repeat task.wait()
-                                        Equiptool(SelectWeapon)
-                                        Chimden()
-                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
-                                        v.HumanoidRootPart.CanCollide = false
-                                        v.Head.CanCollide = false
-                                        v.Humanoid.WalkSpeed = 0
-                                        v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
-                                        PosMon = v.HumanoidRootPart.CFrame
-                                        BringMob = true
-                                    until not _G.LevelFarm or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart") or not v:FindFirstChild("Humanoid") or game:GetService("Players").Localplayer.PlayerGui.Main.Quest.Visible == false
-                                else
-                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-                                end
+                        for _, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v.Name == Mon then
+                                repeat
+                                    task.wait()
+                                    Equiptool(SelectWeapon)
+                                    Chimden()
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.Head.CanCollide = false
+                                    v.Humanoid.WalkSpeed = 0
+                                    v.HumanoidRootPart.Size = Vector3.new(100, 100, 100)
+                                    PosMon = v.HumanoidRootPart.CFrame
+                                    BringMob = true
+                                until not _G.LevelFarm or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart") or not v:FindFirstChild("Humanoid") or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible
+                            else
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                             end
                         end
                     end
                 end
-                    for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
-                        if string.find(v.Name,NameMon) then
-                            if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude >= 10 then
-                                Tween(v.CFrame * CFrame.new(2, 20, 2))
-                            end
-                        end
+                for _, v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
+                    if string.find(v.Name, NameMon) and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude >= 10 then
+                        Tween(v.CFrame * CFrame.new(2, 20, 2))
                     end
                 end
             end)
         end
     end
 end)
+
 
 
 
