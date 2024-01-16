@@ -887,14 +887,6 @@ function clearConsole()
     end
 end
 
-spawn(function()
-    while wait() do
-        pcall(function()
-            clearConsole()
-        end)
-    end
-end)
-
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/Nghiavndeptraivcc/Orion-nhu-cut/main/Orion.Source')))()
 local Window = OrionLib:MakeWindow({Name = "Night Hub", HidePremium = false,IntroText = "Night Hub", SaveConfig = true, ConfigFolder = "Night Hub"})
 
@@ -1289,3 +1281,4 @@ function AntiKick()
     end
 end
 AntiKick()
+clearConsole()
