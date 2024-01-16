@@ -1,4 +1,3 @@
--- Check Sea & Check Game :
 if game.PlaceId == 2753915549 then
     Sea1 = true
 elseif game.PlaceId == 4442272183 then
@@ -9,8 +8,7 @@ else
     game:GetService("Players").LocalPlayer:Kick("Support Only Blox Fruits")
 end
 
--- CheckQuest :
-function QuestCheck() -- Tool Google On TOP
+function QuestCheck()
     MyLevel = game: GetService("Players").LocalPlayer.Data.Level.Value
     if Sea1 then
     if MyLevel == 1 or MyLevel <= 9 then
@@ -628,7 +626,6 @@ function QuestCheck() -- Tool Google On TOP
     end
     end
     end
--- Tween :
 
 function Tween(Pos)
     Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
@@ -667,48 +664,31 @@ function Teleport(P)
     NoClip = false
 end
 
--- Clip :
-
-spawn(
-    function()
-        while task.wait() do
-            if _G.LevelFarm or NoClip then
-                if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
-                    local Noclip = Instance.new("BodyVelocity")
-                    Noclip.Name = "BodyClip"
-                    Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
-                    Noclip.MaxForce = Vector3.new(100000, 100000, 100000)
-                    Noclip.Velocity = Vector3.new(0, 0, 0)
-                end
+spawn(function()
+    while task.wait() do
+        if _G.LevelFarm or NoClip then
+            if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
+                local Noclip = Instance.new("BodyVelocity")
+                Noclip.Name = "BodyClip"
+                Noclip.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
+                Noclip.MaxForce = Vector3.new(100000, 100000, 100000)
+                Noclip.Velocity = Vector3.new(0, 0, 0)
             end
         end
     end
-)
+end)
 
--- No CLip Auto Farm :
-spawn(
-    function()
-        game:GetService("RunService").Stepped:Connect(
-            function()
-                if _G.LevelFarm or NoClip then
-                    for i, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
-                        if v:IsA("BasePart") then
-                            v.CanCollide = false
-                        end
-                    end
+spawn(function()
+    game:GetService("RunService").Stepped:Connect(function()
+        if _G.LevelFarm or NoClip then
+            for _, part in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    part.CanCollide = false
                 end
             end
-        )
-    end
-)
-
-function BP(Position)
-	game.Players.LocalPlayer.Character.Head:Destroy()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Position
-	wait(1)
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Position
-	game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-end
+        end
+    end)
+end)
 
 function BP(P)
 	repeat wait(0.5)
@@ -796,24 +776,6 @@ function AttackNoCD()
         end
     end
 end
-
-function AntiKick()
-    for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
-        if v:IsA("LocalScript") then
-            if v.Name == "General" or v.Name == "Shiftlock"  or v.Name == "FallDamage" or v.Name == "4444" or v.Name == "CamBob" or v.Name == "JumpCD" or v.Name == "Looking" or v.Name == "Run" then
-                v:Destroy()
-            end
-        end
-     end
-     for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerScripts:GetDescendants()) do
-        if v:IsA("LocalScript") then
-            if v.Name == "RobloxMotor6DBugFix" or v.Name == "Clans"  or v.Name == "Codes" or v.Name == "CustomForceField" or v.Name == "MenuBloodSp"  or v.Name == "PlayerList" then
-                v:Destroy()
-            end
-        end
-    end
-end
-AntiKick()
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/Nghiavndeptraivcc/Orion-nhu-cut/main/Orion.Source')))()
 local Window = OrionLib:MakeWindow({Name = "Night Hub", HidePremium = false,IntroText = "Night Hub", SaveConfig = true, ConfigFolder = "Night Hub"})
@@ -1234,7 +1196,7 @@ spawn(
 )
 
 spawn(function()
-	while wait(.5) do
+	while wait(.10) do
 		pcall(function()
 			if _G.FastAttack then
 				repeat wait(_G.FastAttackDelay)
@@ -1285,7 +1247,7 @@ task.spawn(function()
         end)
     end
 end)
--- Delete Effect :
+
 getgenv().NoDieEffect = true
 
 if getgenv().NoDieEffect then
@@ -1315,30 +1277,20 @@ if game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit') then
     game:GetService("ReplicatedStorage").Assets:FindFirstChild('SlashHit'):Destroy()
 end
 
-local player = game.Players.LocalPlayer
-local playerName = player.Name
-local playerCount = #game.Players:GetPlayers()
-
-if game:GetService("ReplicatedStorage"):FindFirstChild("Cursed Captain") then
-    local UrlWebhook = "https://discord.com/api/webhooks/1193472883901616239/dywIljZK1mlx0cBOZwDI4uWYhxbMvVb6ZSFJNpJ7K-0X2dJLOOcfMbgJvCnCt-YXfh-r"
-    local HttpService = game:GetService("HttpService")
-
-    local data = {
-        embeds = {{
-            title = "Webhook test",
-            color = 0x7269da,
-            fields = {
-                {name = "Bot Name", value = "Cursed Captainll]", inline = true},
-                {name = "Player's Count", value = "```" .. playerCount .. "/12```", inline = true},
-                {name = "Job ID", value = "```" .. game.JobId .. "```", inline = true},
-                {name = "Script Job ID", value = '```game:GetService("TeleportService"):TeleportToPlaceInstance(' .. game.PlaceId .. ', "' .. game.JobId .. '", ' .. "game.Players.LocalPlayer)```", inline = true}
-            }
-        }}
-    }
-
-    local headers = {["Content-Type"] = "application/json"}
-    local encodedData = HttpService:JSONEncode(data)
-
-    local request = http_request or request or HttpPost or syn.request
-    request({Url = UrlWebhook,Body = encodedData,Method = "POST",Headers = headers})
+function AntiKick()
+    for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+        if v:IsA("LocalScript") then
+            if v.Name == "General" or v.Name == "Shiftlock"  or v.Name == "FallDamage" or v.Name == "4444" or v.Name == "CamBob" or v.Name == "JumpCD" or v.Name == "Looking" or v.Name == "Run" then
+                v:Destroy()
+            end
+        end
+     end
+     for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerScripts:GetDescendants()) do
+        if v:IsA("LocalScript") then
+            if v.Name == "RobloxMotor6DBugFix" or v.Name == "Clans"  or v.Name == "Codes" or v.Name == "CustomForceField" or v.Name == "MenuBloodSp"  or v.Name == "PlayerList" then
+                v:Destroy()
+            end
+        end
+    end
 end
+AntiKick()
