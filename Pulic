@@ -1,43 +1,3 @@
-function LoadSettings()
-	if readfile and writefile and isfile and isfolder then
-		if not isfolder("Vỹ-Gaming Hub") then
-			makefolder("Vỹ-Gaming Hub")
-		end
-		if not isfolder("Vỹ-Gaming Hub/Blox Fruits/") then
-			makefolder("Vỹ-Gaming Hub/Blox Fruits/")
-		end
-		if not isfile("Vỹ-Gaming Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
-			writefile("Vỹ-Gaming Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json", game:GetService("HttpService"):JSONEncode(_G.Settings))
-		else
-			local Decode = game:GetService("HttpService"):JSONDecode(readfile("Vỹ-Gaming Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json"))
-			for i,v in pairs(Decode) do
-				_G.Settings[i] = v
-			end
-		end
-	else
-		return warn("Status : Undetected Executor")
-	end
-end
-
-function SaveSettings()
-	if readfile and writefile and isfile and isfolder then
-		if not isfile("Vỹ-Gaming Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json") then
-			LoadSettings()
-		else
-			local Decode = game:GetService("HttpService"):JSONDecode(readfile("Vỹ-Gaming Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json"))
-			local Array = {}
-			for i,v in pairs(_G.Settings) do
-				Array[i] = v
-			end
-			writefile("Vỹ-Gaming Hub/Blox Fruits/" .. game.Players.LocalPlayer.Name .. ".json", game:GetService("HttpService"):JSONEncode(Array))
-		end
-	else
-		return warn("Status : Undetected Executor")
-	end
-end
-
-LoadSettings()
-
 if game.PlaceId == 2753915549 then
     World1 = true
 elseif game.PlaceId == 4442272183 then
@@ -4305,10 +4265,9 @@ local Library = Update:Window("Vỹ-Gaming HUB","",Enum.KeyCode.RightControl);
 
 local Main = Library:AddTab("Main","6026568198")
 
-Main:AddToggle("Auto Farm Kaitun",_G.Settings.Auto_Farm_Kaitun,function(value)
+Main:AddToggle("Auto Farm Kaitun",true,function(value)
     _G.Auto_Farm_Kaitun = value
     _G.Settings.Auto_Farm_Kaitun = value
-    SaveSettings()
 end)
 
 function AutoFarmLevel()
@@ -4722,10 +4681,9 @@ task.spawn(function()
 end)
 
 if World1 then
-	Main:AddToggle("Auto Second Sea",_G.Settings.Auto_Second_Sea,function(value)
+	Main:AddToggle("Auto Second Sea",true,function(value)
 		_G.Auto_Second_Sea = value
 		_G.Settings.Auto_Second_Sea = value
-		SaveSettings()
 	end)
 
 	spawn(function()
@@ -4783,29 +4741,26 @@ if World1 then
 end
 
 if World2 then
-	Main:AddToggle("Auto Third Sea",_G.Settings.Auto_Third_Sea,function(value)
+	Main:AddToggle("Auto Third Sea",true,function(value)
 		_G.Auto_Third_Sea = value
 		_G.Settings.Auto_Third_Sea = value
-		SaveSettings()
 	end)
 end
 
-Main:AddToggle("Auto Kaitun",_G.Settings.Auto_Kaitun,function(value)
+Main:AddToggle("Auto Kaitun",true,function(value)
     _G.Select_Weapon = "Combat"
     _G.Settings.Auto_Farm_Kaitun = value
     _G.Settings.Auto_Second_Sea = value
     _G.Settings.Auto_Third_Sea = value
 	_G.Settings.Auto_Stats_Kaitun = value
 	_G.Settings.Auto_SuperHuman = value
-    SaveSettings()
 end)
 
 local Ss = Library:AddTab("Stats","7040410130")
 
-Ss:AddToggle("Auto Stats Kaitun",_G.Settings.Auto_Stats_Kaitun,function(value)
+Ss:AddToggle("Auto Stats Kaitun",true,function(value)
 	_G.Auto_Stats_Kaitun = value
 	_G.Settings.Auto_Stats_Kaitun = value
-	SaveSettings()
 end)
 
 spawn(function()
@@ -4847,24 +4802,21 @@ end)
 local M = Library:AddTab("Item","9606626859")
 
 M:AddSeperator("FightingStyle")
-M:AddToggle("Auto SuperHuman",_G.Settings.Auto_SuperHuman,function(value)
+M:AddToggle("Auto SuperHuman",true,function(value)
 	_G.Auto_SuperHuman = value
 	_G.Settings.Auto_SuperHuman = value
-	SaveSettings()
 end)
 
 local Setting = Library:AddTab("Setting","9606644121")
 
-Setting:AddToggle("Auto Buso Haki",_G.Settings.Auto_Buso_Haki,function(value)
+Setting:AddToggle("Auto Buso Haki",true,function(value)
 	_G.Auto_Buso_Haki = value
 	_G.Settings.Auto_Buso_Haki = value
-	SaveSettings()
 end)
 
-Setting:AddToggle("Bring Mob",_G.Settings.Bring_Mob,function(value)
+Setting:AddToggle("Bring Mob",true,function(value)
 	_G.Bring_Mob = value
 	_G.Settings.Bring_Mob = value
-	SaveSettings()
 end)
 
 spawn(function()
@@ -4877,10 +4829,9 @@ spawn(function()
 	end
 end)
 
-Setting:AddToggle("Fast Attack",_G.Settings.FastAttack,function(value)
+Setting:AddToggle("Fast Attack",true,function(value)
 	_G.FastAttack = value
 	_G.Settings.FastAttack = value
-	SaveSettings()
 end)
 
 coroutine.wrap(function()
@@ -4901,14 +4852,12 @@ coroutine.wrap(function()
 end)()
 
 if World1 then
-    Setting:AddToggle("Skip Level",_G.Settings.Skip_Level,function(value)
+    Setting:AddToggle("Skip Level",true,function(value)
         _G.Skip_Level = value
         _G.Settings.Skip_Level = value
-        SaveSettings()
     end)
 end
 
-Setting:AddToggle("Double Quest",_G.Settings.Double_Quest,function(value)
+Setting:AddToggle("Double Quest",true,function(value)
     _G.Double_Quest = value
-    SaveSettings()
 end)
