@@ -189,6 +189,24 @@ end
 
 spawn(function()
     while wait() do
+        for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+            if v.ToolTip == "Melee" and game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+                SelectWP = v.Name
+            end
+        end
+    end
+end
+
+function EquipTool(Toolse)
+    local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(Toolse)
+    if tool then
+        wait(0.5)
+        game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+    end
+end
+
+spawn(function()
+    while wait() do
         pcall(function()
             if _G.PlayersAura then
                 if join == true then
@@ -200,15 +218,7 @@ spawn(function()
                                     task.wait()
                                     TietCanh = v.Humanoid.Health
                                     NameTarget = v.Name
-                                    if BypassTP then
-                                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude >= 2000 then
-                                            BTP(v.HumanoidRootPart.CFrame)
-                                        elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 2000 then
-                                            Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 0, 0))
-                                        end
-                                    else
-                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 0, 0))
-                                    end
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(0, 0, 0))
                                     spawn(function()
                                         if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 150 then
                                             spawn(function()
@@ -216,6 +226,7 @@ spawn(function()
                                                 X()
                                                 C()
                                                 _G.AutoClick = true
+                                                EquipTool(SelectWP)
                                             end)
                                         end
                                     end)
