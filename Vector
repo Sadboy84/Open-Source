@@ -5952,7 +5952,7 @@ if CustomFindFirstChild(MaterialMob) then
     end)
 end)   
 end              
-Vec("<Color=Yellow>Vector Hub loaded successfully<Color=/>")                                                               
+Vec("<Color=Yellow>Cày thuê Ở Discord<Color=/>")                                                               
 page2:Seperator("⚙️")
 if _G.Mode == "English"then
 local FastAttackType = {
