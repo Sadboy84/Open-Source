@@ -1,21 +1,3 @@
-repeat
-    task.wait()
-until game:IsLoaded()
-repeat
-    task.wait()
-until game.Players
-repeat
-    task.wait()
-until game.Players.LocalPlayer
-wait(5)
-LoadedUiHub = false
-local b = syn and syn.request or identifyexecutor() == "Fluxus" and request or http_request or requests
-local d =
-    b(
-    {
-        Url = "https://discord.com/api/webhooks/1128829073263697950/97FYWnA8v3W5iIpcC6WNQWkjpSIW0O_zERxZr2oCEreCPIZRFdG9sWFZjNzYYMcx4BCE"
-    }
-)
 function CheckSea(e)
     if game.PlaceId == 2753915549 then
         if e == 1 then
