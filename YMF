@@ -6235,9 +6235,9 @@ spawn(
                     if Race == "Human V2" then
                         ClaimQuestV3()
                         BossSpawned = {
-                            ["Diamond [Lv. 750] [Boss]"] = CheckBoss("Diamond [Lv. 750] [Boss]"),
-                            ["Fajita [Lv. 925] [Boss]"] = CheckBoss("Fajita [Lv. 925] [Boss]"),
-                            ["Jeremy [Lv. 850] [Boss]"] = CheckBoss("Jeremy [Lv. 850] [Boss]")
+                            ["Diamond"] = CheckBoss("Diamond"),
+                            ["Fajita"] = CheckBoss("Fajita"),
+                            ["Jeremy"] = CheckBoss("Jeremy")
                         }
                         sk = {}
                         for r, v in pairs(BossSpawned) do
