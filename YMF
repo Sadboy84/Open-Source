@@ -8756,7 +8756,7 @@ function getPersent(cM, cN)
     return math.floor(cM / cN * 100) / 100 * 100
 end
 function CheckItem2(ah)
-    for k, v in pairs(game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("getInventory"))Soul Gui do
+    for k, v in pairs(game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("getInventory")) do
         if v.Name == ah then
             return v.Name .. " "
         end
