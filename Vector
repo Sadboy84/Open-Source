@@ -205,7 +205,7 @@ ImageButton.Size = UDim2.new(0, 45, 0, 45)
 ImageButton.Draggable = true
 ImageButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 ImageButton.BackgroundTransparency = 1
-ImageButton.Image = "rbxassetid://14645512457" -- กำหนดรูปภาพให้กับ ImageButton 
+ImageButton.Image = "rbxassetid://16130568730" -- กำหนดรูปภาพให้กับ ImageButton 
 -- เมื่อคลิกปุ่มใน ImageButton
 function LoadFunction()    
         ImageButton.MouseEnter:Connect(function()
@@ -1546,7 +1546,7 @@ end
 
 
 --[[page/Tab]]
-    local Update =  loadstring(Game:HttpGet"https://raw.githubusercontent.com/Hmmm213/Uitur/main/README.md")()
+    local Update =  loadstring(Game:HttpGet"https://raw.githubusercontent.com/Marismegai/Open-Source/14dc9eb9cdc4e7e3b4c5329a2f983b07533fe5e2/H")()
     local Library = Update:Window("Vector Hub","",Enum.KeyCode.F1);
     local page1 = Library:Tab("General","rbxassetid://11446900930")
     local page2 = Library:Tab("Setting","rbxassetid://11446835336")
@@ -1563,7 +1563,7 @@ end
     local page15 = Library:Tab("Kitsune","rbxassetid://8028233454")
     local page11 = Library:Tab("Shop","rbxassetid://6031265976")
     local page12 = Library:Tab("Misc","rbxassetid://11447063791")
-page1:Seperator("Vector Hub")
+page1:Seperator("Blox Fruits")
 Time = page1:Label("..")
 page1:Label("Username : "..game.Players.LocalPlayer.DisplayName)
 function UpdateTime()
@@ -1611,13 +1611,13 @@ end)
 if _G.Mode == "English" then
 page1:Label("Join My Discord For More News!")
     page1:Button("Copy Discord Link",function()
-         setclipboard("https://discord.gg/977JQXX82w")
+         setclipboard("https://discord.com/invite/S4EtaxnZ3D")
          game:GetService("StarterGui"):SetCore("SendNotification",{Title = "VectorHub",Text = "Successfully copied",Icon = "rbxassetid://14645512457",Duration = 3})
     end)
 else
 page1:Label("เข้าดิสคอร์ดเพื่อข่าวสารต่างๆ")
     page1:Button("ก็อปปี้ลิ้งดิสคอร์ด",function()
-        setclipboard("https://discord.gg/977JQXX82w")
+        setclipboard("https://discord.com/invite/S4EtaxnZ3D")
         game:GetService("StarterGui"):SetCore("SendNotification",{Title = "VectorHub",Text = "คัดลอกเรียบร้อยแล้ว",Icon = "rbxassetid://14645512457",Duration = 3})
     end)
 end
