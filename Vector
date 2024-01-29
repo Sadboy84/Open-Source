@@ -1652,7 +1652,7 @@ if _G.Mode == "English" then
                     local HealthPercent = game.Players.LocalPlayer.Character.Humanoid.Health / game.Players.LocalPlayer.Character.Humanoid.MaxHealth * 100
                     if HealthPercent < 20 then
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 100, 0)
-                        game:GetService("StarterGui"):SetCore("SendNotification",{Title = "VectorHub",Text = "Safe Mode Running..",Icon = "rbxassetid://14645512457",Duration = 1})
+                        game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Maria Hub",Text = "Safe Mode Running..",Icon = "rbxassetid://16130568730",Duration = 1})
                     end
                 end
                 task.wait()
@@ -1670,7 +1670,7 @@ if _G.Mode == "English" then
                         local HealthPercent = game.Players.LocalPlayer.Character.Humanoid.Health / game.Players.LocalPlayer.Character.Humanoid.MaxHealth * 100
                         if HealthPercent < 20 then
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 100, 0)
-                            game:GetService("StarterGui"):SetCore("SendNotification",{Title = "VectorHub",Text = "เซฟโหมดทำงาน..",Icon = "rbxassetid://14645512457",Duration = 1}) 
+                            game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Maris Hub",Text = "เซฟโหมดทำงาน..",Icon = "rbxassetid://16130568730",Duration = 1}) 
                         end
                     end
                     task.wait()
@@ -2135,7 +2135,7 @@ page1:Toggle("Auto Saber", _G.AutoSaber , function(value)
         toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
         task.wait()
     end
-    game:GetService("StarterGui"):SetCore("SendNotification",{Title = "VectorHub",Text = "Close FastTP",Icon = "rbxassetid://14645512457",Duration = 1})
+    game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Maris Hub",Text = "Close FastTP",Icon = "rbxassetid://16130568730",Duration = 1})
 end)
 else
 page1:Toggle("ออโต้ดาบแชงค์", _G.AutoSaber , function(value)
@@ -4867,7 +4867,7 @@ if _G.Mode == "English" then
                                             elseif
                                                 string.find(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("gravestoneEvent",2),"Error")
                                              then
-                                                game:GetService("StarterGui"):SetCore("SendNotification",{Title = "VectorHub",Text = "Go to Grave",Icon = "rbxassetid://14645512457",Duration = 3})
+                                                game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Maris Hub",Text = "Go to Grave",Icon = "rbxassetid://16130568730",Duration = 3})
                                                 toTarget(CFrame.new(-8653.2060546875, 140.98487854003906, 6160.033203125))
                                             elseif
                                                 string.find(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("gravestoneEvent",2),"Nothing")
@@ -5028,12 +5028,12 @@ if _G.Mode == "English" then
                                             elseif
                                                 string.find(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("gravestoneEvent",2),"Error")
                                              then
-                                                game:GetService("StarterGui"):SetCore("SendNotification",{Title = "VectorHub",Text = "Go to Grave",Icon = "rbxassetid://14645512457",Duration = 3})
+                                                game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Maris Hub",Text = "Go to Grave",Icon = "rbxassetid://16130568730",Duration = 3})
                                                 toTarget(CFrame.new(-8653.2060546875, 140.98487854003906, 6160.033203125))
                                             elseif
                                                 string.find(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("gravestoneEvent",2),"Nothing")
                                              then
-                                                game:GetService("StarterGui"):SetCore("SendNotification",{Title = "VectorHub",Text = "Wait Next Night",Icon = "rbxassetid://14645512457",Duration = 3})
+                                                game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Maris Hub",Text = "Wait Next Night",Icon = "rbxassetid://16130568730",Duration = 3})
                                             else
                                                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("gravestoneEvent",2,true)
                                             end
@@ -6564,8 +6564,8 @@ if _G.Mode == "English" then
                                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                                 end
                                 if game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate") and game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate").Level.Value >= 300 then
-                                    game:GetService("StarterGui"):SetCore("SendNotification",{Title = "VectorHub",Text = "เปิดออโต้ดันเจี้ยนต้องการเงินม่วง1500",Icon = "rbxassetid://14645512457",Duration = 1})
-                                    game:GetService("StarterGui"):SetCore("SendNotification",{Title = "VectorHub",Text = "OpenAutoRaidYouneed1500Fragment",Icon = "rbxassetid://14645512457",Duration = 1})
+                                    game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Maris Hub",Text = "เปิดออโต้ดันเจี้ยนต้องการเงินม่วง1500",Icon = "rbxassetid://16130568730",Duration = 1})
+                                    game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Maris Hub",Text = "OpenAutoRaidYouneed1500Fragment",Icon = "rbxassetid://16130568730",Duration = 1})
 
                                     local args = {
                                         [1] = "BlackbeardReward",
@@ -7401,8 +7401,8 @@ else
                                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                                     end
                                     if game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate") and game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate").Level.Value >= 300 then
-                                        game:GetService("StarterGui"):SetCore("SendNotification",{Title = "VectorHub",Text = "เปิดดันเจี้ยนต้องการเงินม่วง1500",Icon = "rbxassetid://14645512457",Duration = 1})
-                                        game:GetService("StarterGui"):SetCore("SendNotification",{Title = "VectorHub",Text = "OpenAutoRaidYouneed1500Fragment",Icon = "rbxassetid://14645512457",Duration = 1})
+                                        game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Maris Hub",Text = "เปิดดันเจี้ยนต้องการเงินม่วง1500",Icon = "rbxassetid://16130568730",Duration = 1})
+                                        game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Maris Hub",Text = "OpenAutoRaidYouneed1500Fragment",Icon = "rbxassetid://16130568730",Duration = 1})
 
 
                                         local args = {
@@ -9445,7 +9445,7 @@ end
 if _G.Mode == "English" then
     page4:Toggle("BypassTP[For All Teleport]", _G.BypassTP, function(value)
         _G.BypassTP = value
-        game:GetService("StarterGui"):SetCore("SendNotification",{Title = "VectorHub",Text = "If Bug Turn Off",Icon = "rbxassetid://14645512457",Duration = 3})
+        game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Maris Hub",Text = "If Bug Turn Off",Icon = "rbxassetid://16130568730",Duration = 3})
     end)
     else
     page4:Toggle("วาร์ปเร็ว[สำหรับการเทเลพอร์ตทั้งหมด]", _G.BypassTP, function(value)
@@ -9534,7 +9534,7 @@ spawn(function()
                         if game:GetService("Players").LocalPlayer.VisionRadius.Value >= 6000 then
                             game:GetService("StarterGui"):SetCore("SendNotification",
                                 {
-                                    Icon = "rbxassetid://14645512457",
+                                    Icon = "rbxassetid://16130568730",
                                     Title = "Observation",
                                     Text = "You Have Max Observation"
                                 }
@@ -12097,7 +12097,7 @@ page9:Toggle("Auto Mirage Island [HOP]", _G.Settings.MirageHop, function(value)
 _G.MirageHop = value
 _G.Settings.MirageHop = value
 _G.AutoMirageIslandHop = value
-game:GetService("StarterGui"):SetCore("SendNotification",{Title = "VectorHub",Text = "HopServer...",Icon = "rbxassetid://14645512457",Duration = 5})
+game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Maris Hub",Text = "HopServer...",Icon = "rbxassetid://16130568730",Duration = 5})
 if _G.MirageHop and not game.Workspace._WorldOrigin.Locations:FindFirstChild('Mirage Island') then
     while _G.MirageHop do wait(10)
     repeat task.wait() until game:IsLoaded() and game.Players.LocalPlayer
@@ -13510,7 +13510,7 @@ SaveSettings()
                                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LegendarySwordDealer", "1")
                                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LegendarySwordDealer", "2")
                                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LegendarySwordDealer", "3")
-                                        game:GetService("StarterGui"):SetCore("SendNotification",{Title = "VectorHub",Text = "HopServer...",Icon = "rbxassetid://14645512457",Duration = 5})
+                                        game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Maris Hub",Text = "HopServer...",Icon = "rbxassetid://16130568730",Duration = 5})
                                         while _G.AutoBuyLegendarySwordHop do task.wait()
                                         wait(10)
                                         Teleport()
@@ -13545,7 +13545,7 @@ spawn(function()
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LegendarySwordDealer", "1")
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LegendarySwordDealer", "2")
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LegendarySwordDealer", "3")
-                        game:GetService("StarterGui"):SetCore("SendNotification",{Title = "VectorHub",Text = "HopServer...",Icon = "rbxassetid://14645512457",Duration = 5})
+                        game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Maris Hub",Text = "HopServer...",Icon = "rbxassetid://16130568730",Duration = 5})
                         while _G.AutoBuyLegendarySwordHop do task.wait()
                         wait(10)
                         Teleport()
@@ -13588,7 +13588,7 @@ SaveSettings()
                             [2] = "2"
                         }
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-                        game:GetService("StarterGui"):SetCore("SendNotification",{Title = "VectorHub",Text = "HopServer...",Icon = "rbxassetid://14645512457",Duration = 5})
+                        game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Maris Hub",Text = "HopServer...",Icon = "rbxassetid://16130568730",Duration = 5})
                         while _G.AutoBuyEnchanmentHakiHop do task.wait()
                         wait(10)
                         Teleport()
@@ -13627,7 +13627,7 @@ else
                                 [2] = "2"
                             }
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-                            game:GetService("StarterGui"):SetCore("SendNotification",{Title = "VectorHub",Text = "HopServer...",Icon = "rbxassetid://14645512457",Duration = 5})
+                            game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Maris Hub",Text = "HopServer...",Icon = "rbxassetid://16130568730",Duration = 5})
                             while _G.AutoBuyEnchanmentHakiHop do task.wait()
                             wait(10)
                             Teleport()
@@ -13803,12 +13803,12 @@ JobId_Textbox = x
 end)
 page12:Button("Join JobID",function()
     TPS:TeleportToPlaceInstance(game.PlaceId, JobId_Textbox, LP)
-    game:GetService("StarterGui"):SetCore("SendNotification",{Title = "VectorHub",Text = "Success JobID Please Wait",Icon = "rbxassetid://14645512457",Duration = 3}) 
+    game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Maris Hub",Text = "Success JobID Please Wait",Icon = "rbxassetid://16130568730",Duration = 3}) 
 end)
 
 page12:Button("Copy JobID",function()
     setclipboard(game.JobId)
-    game:GetService("StarterGui"):SetCore("SendNotification",{Title = "VectorHub",Text = "Success Copy JobID",Icon = "rbxassetid://14645512457",Duration = 3})   
+    game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Maris Hub",Text = "Success Copy JobID",Icon = "rbxassetid://16130568730",Duration = 3})   
 end)
 page12:Button("Join Pirates Team", function()
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Pirates")
@@ -13826,12 +13826,12 @@ JobId_Textbox = x
 end)
 page12:Button("จอย JobID",function()
     TPS:TeleportToPlaceInstance(game.PlaceId, JobId_Textbox, LP)
-    game:GetService("StarterGui"):SetCore("SendNotification",{Title = "VectorHub",Text = "Success JobID Please Wait",Icon = "rbxassetid://14645512457",Duration = 3}) 
+    game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Maris Hub",Text = "Success JobID Please Wait",Icon = "rbxassetid://16130568730",Duration = 3}) 
 end)
 
 page12:Button("ก็อปปี้ JobID",function()
     setclipboard(game.JobId)
-    game:GetService("StarterGui"):SetCore("SendNotification",{Title = "VectorHub",Text = "Success Copy JobID",Icon = "rbxassetid://14645512457",Duration = 3})   
+    game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Maris Hub",Text = "Success Copy JobID",Icon = "rbxassetid://16130568730",Duration = 3})   
 end)
 page12:Button("เข้าร่วมทีมโจรสลัด", function()
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Pirates")
