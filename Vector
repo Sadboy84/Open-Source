@@ -12442,7 +12442,7 @@ page9:Toggle("ดูดวงจันทร์", _G.LockMoon , function(value)
     LockMoon()
 end)
 end
-page10:Seperator("RaceV4")
+page10:Seperator("Race V4")
 if _G.Mode == "English" then
 page10:Toggle("Auto Active RaceV3",_G.AutoActiveRace,function(value)  
     _G.AutoActiveRace = value
