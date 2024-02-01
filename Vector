@@ -12708,7 +12708,7 @@ function FullBright()
         end)
     end
 
-    page14:Seperator("SeaEvent")
+    page14:Seperator("Sea Events")
 if _G.Mode == "English" then
     page14:Toggle("Auto Kill Mon Sea Event", _G.AutoEvent, function(value)
         _G.AutoEvent = value
