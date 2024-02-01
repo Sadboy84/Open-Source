@@ -295,7 +295,7 @@ BtnStroke.Name = "BtnStroke"
     TextLabel.Size = UDim2.new(0, 200, 0, 50)
     TextLabel.Font = Enum.Font.FredokaOne
     TextLabel.Text = "Maris Hub"
-    TextLabel.TextColor3 = Color3.fromRGB(0, 86, 255)
+    TextLabel.TextColor3 = Color3.fromRGB(183, 189, 255)
     TextLabel.TextSize = 18.000
     TextLabel.TextWrapped = true
  else
