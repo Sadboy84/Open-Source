@@ -5953,7 +5953,7 @@ if CustomFindFirstChild(MaterialMob) then
 end)   
 end              
 Vec("<Color=Yellow>Cày thuê Ở Discord<Color=/>")                                                               
-page2:Seperator("⚙️")
+page2:Seperator("Setting")
 if _G.Mode == "English"then
 local FastAttackType = {
 "Fast",
@@ -6309,7 +6309,7 @@ page2:Toggle("หยุดการสั่นของกล้อง",true,fu
     CameraShaker()
 end)
 end
-page3:Seperator("📊")
+page3:Seperator("Stats")
 page3:Dropdown("Select Stats",{"Melee","Defense","Sword","Gun","Fruit"},function(value)
     _G.SelectStats = value
 end)
@@ -9046,7 +9046,7 @@ else
         end)
     end
 
-page4:Seperator("🚀")
+page4:Seperator("Teleport")
 
 if _G.Mode == "English" then
     page4:Button("Teleport to World 1", function(value)
@@ -9768,7 +9768,7 @@ local SharkComplete = false
 local DeathComplete = false
 local GodComplete = false
 
-page5:Seperator("💼")
+page5:Seperator("Item")
     page5:Toggle("Auto Hallow Scythe", _G.AutoFarmBossHallow, function(value)
         _G.AutoFarmBossHallow = value
         if value == false then
@@ -10805,7 +10805,7 @@ end
 local function inmyself(name)
 	return game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(name) or game:GetService("Players").LocalPlayer.Character:FindFirstChild(name);
 end
-page6:Seperator("✨")
+page6:Seperator("Mastery")
 _G.MobHealth = 30
 if _G.Mode == "English" then
 page6:Toggle("Auto Fruit Mastery", _G.Settings.AutoFarmFruitMastery, function(value)
@@ -10914,7 +10914,7 @@ if _G.AutoFarmFruitMastery then
 end
 end
 end)
-page7:Seperator("🍈")
+page7:Seperator("DevilFruit")
 if _G.Mode == "English" then
 page7:Toggle("BringFruit",_G.Auto_Bring_Fruit , function(value)
      _G.Auto_Bring_Fruit  = value
@@ -11187,7 +11187,7 @@ local SelectRaids = {
 "Bird: Phoenix",
 "Dough"
 }
-page8:Seperator("⚔️")
+page8:Seperator("Raid")
 if _G.Mode == "English" then
 page8:Dropdown("Select Raids",SelectRaids, function(value)
     _G.SelectRaids = value
@@ -12041,7 +12041,7 @@ pcall(function()
 end)
 end
 end
-page9:Seperator("🏝️")
+page9:Seperator("Mirage Island")
 local Mirragecheck = page9:Label('...')
 if _G.Mode == "English" then
 spawn(function()
@@ -12442,7 +12442,7 @@ page9:Toggle("ดูดวงจันทร์", _G.LockMoon , function(value)
     LockMoon()
 end)
 end
-page10:Seperator("🐰")
+page10:Seperator("RaceV4")
 if _G.Mode == "English" then
 page10:Toggle("Auto Active RaceV3",_G.AutoActiveRace,function(value)  
     _G.AutoActiveRace = value
