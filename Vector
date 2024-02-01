@@ -12708,7 +12708,7 @@ function FullBright()
         end)
     end
 
-    page14:Seperator("🌊")
+    page14:Seperator("SeaEvent")
 if _G.Mode == "English" then
     page14:Toggle("Auto Kill Mon Sea Event", _G.AutoEvent, function(value)
         _G.AutoEvent = value
@@ -13344,7 +13344,7 @@ else
 end
 
  
-page15:Seperator("🦊")
+page15:Seperator("Kitsune")
 local Kitsunecheck = page15:Label('...')
 if _G.Mode == "English" then
 spawn(function()
@@ -13477,7 +13477,7 @@ end
         end)
     end
 
-page11:Seperator("🛒")
+page11:Seperator("Shop")
 
 if _G.Mode == "English" then
     page11:Label("Auto Buy")
@@ -13793,7 +13793,7 @@ end)
 page11:Button("Swordsman Hat [150,000]", function()
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem", "Swordsman Hat")
 end)
-page12:Seperator("🧍")
+page12:Seperator("Misc")
 if _G.Mode == "English" then
 local TPS = game:GetService("TeleportService")
 local LP = game:GetService("Players").LocalPlayer
