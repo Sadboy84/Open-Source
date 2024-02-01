@@ -1554,7 +1554,7 @@ end
     local page4 = Library:Tab("Teleport","rbxassetid://16130568730")
     local page5 = Library:Tab("Item","rbxassetid://16130568730")
     local page6 = Library:Tab("Mastery","rbxassetid://16130568730")
-    local page7 = Library:Tab("DevilFruit","rbxassetid://16130568730")
+    local page7 = Library:Tab("Devil Fruit","rbxassetid://16130568730")
     local page8 = Library:Tab("Raid","rbxassetid://16130568730")
     local page13 = Library:Tab("Combat","rbxassetid://16130568730")
     local page9 = Library:Tab("Mirage","rbxassetid://16130568730")
@@ -10914,7 +10914,7 @@ if _G.AutoFarmFruitMastery then
 end
 end
 end)
-page7:Seperator("DevilFruit")
+page7:Seperator("Devil Fruit")
 if _G.Mode == "English" then
 page7:Toggle("BringFruit",_G.Auto_Bring_Fruit , function(value)
      _G.Auto_Bring_Fruit  = value
