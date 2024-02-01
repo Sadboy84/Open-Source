@@ -1558,7 +1558,7 @@ end
     local page8 = Library:Tab("Raid","rbxassetid://16130568730")
     local page13 = Library:Tab("Combat","rbxassetid://16130568730")
     local page9 = Library:Tab("Mirage","rbxassetid://16130568730")
-    local page10 = Library:Tab("RaceV4","rbxassetid://16130568730")
+    local page10 = Library:Tab("Race V4","rbxassetid://16130568730")
     local page14 = Library:Tab("SeaEvent","rbxassetid://16130568730")
     local page15 = Library:Tab("Kitsune","rbxassetid://16130568730")
     local page11 = Library:Tab("Shop","rbxassetid://16130568730")
