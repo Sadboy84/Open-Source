@@ -13393,7 +13393,7 @@ end
         end
         end)
         if _G.Mode == "English" then
-        page15:Toggle("EspKitsuneIsland", _G.EspKitsuneIsland, function(value)
+        page15:Toggle("Esp Kitsune Island", _G.EspKitsuneIsland, function(value)
             _G.EspKitsuneIsland = value
             EspKitsuneIsland()
         end)
